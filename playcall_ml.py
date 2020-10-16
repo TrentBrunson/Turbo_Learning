@@ -11,6 +11,14 @@ import tensorflow as tf
 data_df = pd.read_csv('./Resources/Texas_combined.csv')
 
 #%%
+# Check categorical columns
+data_cat = data_df.dtypes[data_df.dtypes == "object"].index.tolist()
+
+#%%
+# Check the number of unique values in each column
+data_df[data_cat].nunique()
+
+#%%
 # Drop Output label into separate object
 
 
