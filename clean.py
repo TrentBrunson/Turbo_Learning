@@ -38,10 +38,16 @@ year_data = year_data[['gameId', 'year', 'week', 'homeAbbr', 'awayAbbr', 'offens
 
 # get only Texas data for both home and away games
 Tex_data = year_data[(year_data.homeAbbr == 'TEX') | (year_data.awayAbbr == 'TEX')]
+# get pass and rush plays only
+plays = ['Pass*', 'Rush']
+
+# no regex, runs faster
+df_Tex_plays = Tex_data[(Tex_data.type.str.contains('Pass', regex=False)) | (
+    Tex_data.type.str.contains('Rush', regex=False))]
 
 # write to csv
-Tex_data.to_csv('data/tex/Tex_data2013', sep= ',', index= False)
-Tex_data
+df_Tex_plays.to_csv('data/tex/Tex_data2013', sep= ',', index= False)
+df_Tex_plays
 # %%
 # check out values in columns
 column_list = list(Tex_data.columns.tolist())
@@ -50,7 +56,10 @@ Tex_data[column_list].nunique()
 # see list of values in play type column
 sorted(Tex_data.type.unique().tolist())
 # %%
-# get pass and rush plays only
+
+
+df_Tex_plays.shape
+# %%
 
 # %%
 
@@ -59,12 +68,6 @@ sorted(Tex_data.type.unique().tolist())
 # %%
 Tex_data.shape
 # %%
-
-#%%
-year_data.shape
-# %%
-list(year_data)
-
 # iterate through loop for year
 
 # %%
