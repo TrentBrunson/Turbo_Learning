@@ -10,7 +10,8 @@ from config import db_password
 
 # %%
 # read over data folder and open each csv
-
+start_year = 2015
+end_year = 2018
 # set dir location
 year = 2013  # set range of years to look at for loop
 dirYear = 'data/2013'
@@ -39,14 +40,12 @@ year_data = year_data[['gameId', 'year', 'week', 'homeAbbr', 'awayAbbr', 'offens
 # get only Texas data for both home and away games
 Tex_data = year_data[(year_data.homeAbbr == 'TEX') | (year_data.awayAbbr == 'TEX')]
 # get pass and rush plays only
-plays = ['Pass*', 'Rush']
-
 # no regex, runs faster
 df_Tex_plays = Tex_data[(Tex_data.type.str.contains('Pass', regex=False)) | (
     Tex_data.type.str.contains('Rush', regex=False))]
 
 # write to csv
-df_Tex_plays.to_csv('data/tex/Tex_data2013', sep= ',', index= False)
+df_Tex_plays.to_csv('data/tex/Tex_data2013.csv', sep= ',', index= False)
 df_Tex_plays
 # %%
 # check out values in columns
@@ -56,13 +55,41 @@ Tex_data[column_list].nunique()
 # see list of values in play type column
 sorted(Tex_data.type.unique().tolist())
 # %%
-
-
 df_Tex_plays.shape
 # %%
+# make this into f(x) and call in loop iterating through year
+def combine_years(year): 
+    path_string = f"data/{year}/*.csv"
+    year_data = pd.DataFrame()
+    for f in glob.glob(path_string):
+        df = pd.read_csv(f)
+        year_data = year_data.append(df,ignore_index=True)
+    # year_data.shape
+
+    # get right columns for each year
+    year_data = year_data[['gameId', 'year', 'week', 'homeAbbr', 'awayAbbr', 'offenseAbbr', 'defenseAbbr', 'homeScore', 'awayScore', 'quarter', 'clock', 'type', 'down', 'distance', 'yardLine', 'yardsGained']]
+
+    # get only Texas data for both home and away games
+    Tex_data = year_data[(year_data.homeAbbr == 'TEX') | (year_data.awayAbbr == 'TEX')]
+    
+    # get pass and rush plays only
+    # no regex, runs faster
+    df_Tex_plays = Tex_data[(Tex_data.type.str.contains('Pass', regex=False)) | (
+        Tex_data.type.str.contains('Rush', regex=False))]
+
+    # write to csv
+    # df_Tex_plays.to_csv('data/tex/Tex_data2013', sep= ',', index= False)
+    
+    csv_path = f"data/tex/Tex_data{year}.csv"
+    df_Tex_plays.to_csv(csv_path, sep= ',', index= False)
+    return df_Tex_plays
 
 # %%
-
+# create for loop to iterate through rows
+for i in range (start_year, end_year):
+    combine_years(i)
+# %%
+path_Tex = 'data/tex'
 # %%
 
 # %%
