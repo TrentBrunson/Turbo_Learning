@@ -11,7 +11,7 @@ The world's fastest, smartest neural network!
 ### Team Communication Plan 
 * Branches for the first week will be named using each member's respective first name, the following weeks the format will consist of first name and task description:
   * EX: Maricela_XXInsertTask DescriptionXXX
-* Each team member will make commits on their branch. 
+* Each team member will make commits on their branch
 * Each tem member is responsible for letting the merging lead (Trent) know when there is a pull request outstanding for their respective section
 * Trent will serve as lead to make the final weekly merge
 
