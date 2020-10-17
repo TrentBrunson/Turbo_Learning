@@ -12,7 +12,7 @@ The world's fastest, smartest neural network!
 * Branches for the first week will be named using each member's respective first name, the following weeks the format will consist of first name and task description:
   * EX: Maricela_XXInsertTask DescriptionXXX
 * Each team member will make commits on their branch
-* Each tem member is responsible for letting the merging lead (Trent) know when there is a pull request outstanding for their respective section
+* Each team member is responsible for letting the merging lead (Trent) know when there is a pull request outstanding for their respective section
 * Trent will serve as lead to make the final weekly merge
 
 ## Project
@@ -27,7 +27,7 @@ In football, good defense keeps the other team from scoring and provides a good 
 We obtained reliable CFB data from the ESPN API, allowing us to analyze several years of data, which we have narrowed down to 6 years. Based on the amount of data we have, we believe these years are enough to accurately identify trends. 
 
 ### Question The Team Hopes To Answer:
-After completeling the project, we hope to be able to answer the following question: 
+After completing the project, we hope to be able to answer the following question: 
 * What is the likelihood that the opposing team will call on a "run" or "pass" based on the play, distance or time?
 * Are there any variables that affect the decision call? If so, what are they? 
 
