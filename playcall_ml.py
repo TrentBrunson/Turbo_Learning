@@ -20,7 +20,8 @@ data_df[data_cat].nunique()
 
 #%%
 # Drop Output label into separate object
-
+output_df = data_df.type
+features_df = data_df.drop(columns='type')
 
 #%%
 # Encode categorical data
