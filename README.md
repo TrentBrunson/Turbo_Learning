@@ -2,13 +2,13 @@
 The world's fastest, smartest neural network!
 
 ## Team Information 
-#### Members: 
+### Members: 
 * Trent Brunson
 * Pablo Maldonado 
 * Maricela Avila 
 * Travis Greenfield 
 
-#### Team Communication Plan 
+### Team Communication Plan 
 * Branches for the first week will be named using each member's respective first name, the following weeks the format will consist of first name and task description:
   * EX: Maricela_XXInsertTask DescriptionXXX
 * Each team member will make commits on their branch. 
