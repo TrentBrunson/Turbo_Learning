@@ -1,14 +1,20 @@
 #%%
 # Import dependencies
 import pandas as pd
+from sqlalchemy import create_engine
+from config import db_password
 import matplotlib as plt
-from sklearn.datasets import make_blobs
 import sklearn as skl
 import tensorflow as tf
 
 #%%
-# Import clean dataset
-data_df = pd.read_csv('./Resources/Texas_combined.csv')
+# Import clean dataset from raw file
+data_df = pd.read_csv('Texas_combined.csv')
+
+#%%
+# Import clean df from postgres db
+db_string = 'f”postgres://postgres:{postgres}@127.0.0.1:5432/CFB_DB'
+engine = create_engine(db_string)
 
 #%%
 # Check categorical columns
