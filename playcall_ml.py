@@ -12,9 +12,10 @@ import tensorflow as tf
 data_df = pd.read_csv('Texas_combined.csv')
 
 #%%
-# Import clean df from postgres db
-db_string = 'f”postgres://postgres:{postgres}@127.0.0.1:5432/CFB_DB'
-engine = create_engine(db_string)
+# Initialize framework to import clean df from postgres db
+#db_string = 'f”postgres://postgres:{postgres}@127.0.0.1:5432/CFB_DB'
+#engine = create_engine(db_string)
+#pd.read_sql_table('table_name', 'postgres:///db_name')
 
 #%%
 # Check categorical columns
