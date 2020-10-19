@@ -1,4 +1,5 @@
 # adding files to ignore
+.DS*
 /data
 config.py
 
