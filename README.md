@@ -1,5 +1,5 @@
-# turbo-learning
-The world's fastest, smartest neural network!
+# University of Texas Defensive Play-Call Predictor
+
 
 ## Team Information 
 ### Members: 
