@@ -81,6 +81,11 @@ encode_df = pd.DataFrame(enc.fit_transform(features_df[data_cat]))
 encode_df.columns = enc.get_feature_names(data_cat)
 
 #%%
+# Merge encoded DataFrame back into the original feature df and drop original object/category columns
+encoded_features_df = features_df.merge(encode_df,left_index=True, right_index=True)
+encoded_features_df = encoded_features_df.drop(data_cat,1)
+
+#%%
 #Split into testing and training groups
 # Try and 50/50 and then 50/50 the testing data again to then apply to the final validationb. Don't let model see validation until the very end.
 
