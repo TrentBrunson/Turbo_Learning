@@ -1,10 +1,18 @@
 #%%
 # Import dependencies
 import pandas as pd
+
+#DB management
 from sqlalchemy import create_engine
 from config import db_password
-import matplotlib as plt
+
+# ML dependencies
 import sklearn as skl
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import OneHotEncoder
 import tensorflow as tf
 from scipy import stats
 
@@ -41,7 +49,7 @@ data_df.loc[data_df.quarter == 4, 'half'] = 2
 
 #%%
 # Bucketing 'time remaining in half'
-time_remaining_bins = [0, 120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320, 1440, 1560, 1680, 1800]
+time_remaining_bins = [-1, 120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320, 1440, 1560, 1680, 1800]
 labels = ['0-2 min', '2-4 min', '4-6 min', '6-8 min', '8-10 min', '10-12 min', '12-14 min', '14-16 min', '16-18 min', '18-20 min', '20-22 min', '22-24 min', '24-26 min', '26-28 min', '28-30 min']
 data_df['time_remaining_binned'] = pd.cut(data_df['seconds_in_half_remaining'], bins=time_remaining_bins, labels=labels)
 
@@ -63,6 +71,14 @@ features_df[data_cat].nunique()
 #%%
 # Encode categorical data
 
+# Create a OneHotEncoder instance
+enc = OneHotEncoder(sparse=False)
+
+# Fit and transform the OneHotEncoder using the categorical variable list
+encode_df = pd.DataFrame(enc.fit_transform(features_df[data_cat]))
+
+# Add the encoded variable names to the DataFrame
+encode_df.columns = enc.get_feature_names(data_cat)
 
 #%%
 #Split into testing and training groups
