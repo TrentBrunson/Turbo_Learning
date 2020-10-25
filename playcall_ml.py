@@ -40,21 +40,25 @@ data_df.loc[data_df.quarter == 3, 'half'] = 2
 data_df.loc[data_df.quarter == 4, 'half'] = 2
 
 #%%
-
+# Bucketing 'time remaining in half'
+time_remaining_bins = [0, 120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320, 1440, 1560, 1680, 1800]
+labels = ['0-2 min', '2-4 min', '4-6 min', '6-8 min', '8-10 min', '10-12 min', '12-14 min', '14-16 min', '16-18 min', '18-20 min', '20-22 min', '22-24 min', '24-26 min', '26-28 min', '28-30 min']
+data_df['time_remaining_binned'] = pd.cut(data_df['seconds_in_half_remaining'], bins=time_remaining_bins, labels=labels)
 
 #%%
 # Convert all pass outcomes to "pass" to create a true binary outcome
 data_df.loc[data_df['type'].str.contains('Pass'), 'type'] = 'Pass'
 
 #%%
-# Check categorical columns and check the number of unique values in each column
-data_cat = data_df.dtypes[data_df.dtypes == "object"].index.tolist()
-data_df[data_cat].nunique()
-
-#%%
 # Drop Output label into separate object
 output_df = data_df.type
-features_df = data_df[['year','week','homeAbbr','awayAbbr', 'offenseAbbr', 'defenseAbbr', 'homeScore','awayScore','quarter','down','distance','yardLine','half', 'seconds_in_half_remaining',]]
+features_df = data_df[['year','week','homeAbbr','awayAbbr', 'offenseAbbr', 'defenseAbbr', 'homeScore','awayScore','quarter','down','distance','yardLine','half', 'time_remaining_binned']]
+
+#%%
+# Check categorical columns of feature df and check the number of unique values in each column
+data_cat = features_df.dtypes[features_df.dtypes == "object"].index.tolist()
+data_cat.append('time_remaining_binned')
+features_df[data_cat].nunique()
 
 #%%
 # Encode categorical data
