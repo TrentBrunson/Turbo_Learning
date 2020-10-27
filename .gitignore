@@ -1,6 +1,6 @@
 # adding files to ignore
 .DS*
-/data
+/dataRaw
 config.py
 
 # Byte-compiled / optimized / DLL files
