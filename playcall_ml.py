@@ -115,9 +115,9 @@ X_train_scaled = X_scaler.transform(X_train)
 X_test_scaled = X_scaler.transform(X_test)
 
 #%%
-# Random Forest Model
+# 1st Random Forest Model
 # Create a random forest classifier.
-rf_model = RandomForestClassifier(n_estimators=12, random_state=42)
+rf_model = RandomForestClassifier(n_estimators=128, random_state=42)
 
 # Fitting the model
 rf_model = rf_model.fit(X_train_scaled, y_train)
