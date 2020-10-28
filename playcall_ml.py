@@ -70,7 +70,7 @@ data_df.loc[data_df['type'].str.contains('Pass'), 'type'] = 'Pass'
 #%%
 # Drop Output label into separate object
 output_df = data_df.type
-features_df = data_df[['offenseabbr','defenseabbr', 'texscore','oppscore','quarter','down','distance','yardline','half', 'time_remaining_binned']]
+features_df = data_df[['year', 'offenseabbr','defenseabbr', 'texscore','oppscore','quarter','down','distance','yardline','half', 'time_remaining_binned']]
 
 #%%
 # Check categorical columns of feature df and check the number of unique values in each column
