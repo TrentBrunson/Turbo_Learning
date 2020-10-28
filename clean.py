@@ -10,11 +10,11 @@ from config import db_password
 # %%
 # set end and start values at the beginning
 # no need to make this a user input
-start_year = 2013
+start_year = 2016
 end_year = 2018
 
 # set up data folder to temp hold intermediate data processing step
-path = "data/tex"  # make a location to store only tex data by year
+path = "dataRaw/tex"  # make a location to store only tex data by year
 
 try:
     os.mkdir(path)
@@ -45,7 +45,7 @@ def evaluate_data(df):
 # make this into f(x) and call in loop iterating through year
 # f(x) takes in year value
 def combine_years(year): 
-    path_string = f"data/{year}/*.csv"
+    path_string = f"dataRaw/{year}/*.csv"
     year_data = pd.DataFrame()
     for f in glob.glob(path_string):
         df = pd.read_csv(f, error_bad_lines=False)
@@ -53,7 +53,7 @@ def combine_years(year):
 
     # get right columns for each year - dropping doesn't work because 2014 has issues
     # specfically found week 6 to be problematic; dropped one line of data & it works
-    year_data = year_data[['gameId', 'year', 'week', 'homeAbbr', 'awayAbbr', 
+    year_data = year_data[['gameId', 'driveIndex', 'playIndex', 'year', 'week', 'homeAbbr', 'awayAbbr', 
     'offenseAbbr', 'defenseAbbr', 'homeScore', 'awayScore', 'quarter', 'clock', 
     'type', 'down', 'distance', 'yardLine', 'yardsGained']]
 
@@ -64,7 +64,7 @@ def combine_years(year):
     df_Tex_plays = Tex_data[(Tex_data.type.str.contains('Pass', regex=False)) | (
         Tex_data.type.str.contains('Rush', regex=False))]
     
-    csv_path = f"data/tex/Tex_data{year}.csv"
+    csv_path = f"dataRaw/tex/Tex_data{year}.csv"
     df_Tex_plays.to_csv(csv_path, sep= ',', index= False)
 
     # evaluate the dataframes, verify working
@@ -89,7 +89,7 @@ for i in range (start_year, end_year+1):
 # combine tex folder files into one and save in main directory 
 # that will be published to github
 df_combined = pd.DataFrame()  # initialize dataframe
-for f in glob.glob("data/tex/*.csv"):
+for f in glob.glob("dataRaw/tex/*.csv"):
     df = pd.read_csv(f)
     df_combined = df_combined.append(df,ignore_index=True)
 
