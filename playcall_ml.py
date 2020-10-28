@@ -2,9 +2,12 @@
 # Import dependencies
 import pandas as pd
 
-#DB management
-from sqlalchemy import create_engine
-from config import db_password
+# Python SQL toolkit and Object Relational Mapper
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine, func
+#from config import DB_String
 
 # ML dependencies
 import sklearn as skl
@@ -17,10 +20,23 @@ import tensorflow as tf
 from scipy import stats
 
 #%%
-# Initialize framework to import clean df from postgres db
-#db_string = 'f”postgres://postgres:{postgres}@127.0.0.1:5432/CFB_DB'
-#engine = create_engine(db_string)
-#pd.read_sql_table('table_name', 'postgres:///db_name')
+engine = create_engine("postgres://ttsskopxdmnsfo:4378043c6d59d120e32dd53458a7b496edba8ae3199207429f3709d03c59db82@ec2-52-203-165-126.compute-1.amazonaws.com:5432/d4arif9evev4vq")
+
+# reflect an existing database into a new model
+Base = automap_base()
+# reflect the tables
+Base.prepare(engine, reflect=True)
+
+#%%
+# We can view all of the classes that automap found
+Base.classes.keys()
+
+#%%
+# Create our session (link) from Python to the DB
+session = Session(engine)
+
+#%%
+test_df = pd.read_sql_table('tex_pbp', engine)
 
 #%%
 # Import clean dataset from raw file
