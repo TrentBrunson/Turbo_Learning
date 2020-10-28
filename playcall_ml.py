@@ -24,13 +24,13 @@ from scipy import stats
 
 #%%
 # Import clean dataset from raw file
-data_df = pd.read_csv('Resources/Texas_combined.csv')
+data_df = pd.read_csv('Resources/Texas_combined_final.csv')
 
 #%%
 # Creating a 'time remaining in quarter' column 
 # This allows us to bin easily but also treat "time" as a continuous feature more easily should we choose
 def time_convert(x):
-    m,s = map(int,x.split(':'))
+    h,m,s = map(int,x.split(':'))
     return (m*60)+s
 
 data_df['seconds_in_quarter_remaining'] = data_df.clock.apply(time_convert)
@@ -70,7 +70,7 @@ data_df.loc[data_df['type'].str.contains('Pass'), 'type'] = 'Pass'
 #%%
 # Drop Output label into separate object
 output_df = data_df.type
-features_df = data_df[['year','week','homeAbbr','awayAbbr', 'offenseAbbr', 'defenseAbbr', 'homeScore','awayScore','quarter','down','distance','yardLine','half', 'time_remaining_binned']]
+features_df = data_df[['year','week','offenseabbr','defenseabbr', 'texscore','oppscore','quarter','down','distance','yardline','half', 'time_remaining_binned']]
 
 #%%
 # Check categorical columns of feature df and check the number of unique values in each column
@@ -124,7 +124,7 @@ rf_model = rf_model.fit(X_train_scaled, y_train)
 
 # Evaluate the model
 y_pred = rf_model.predict(X_test_scaled)
-print(f" Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.3f}")
+print(f" Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.4f}")
 
 #%%
 # Create model architecture
