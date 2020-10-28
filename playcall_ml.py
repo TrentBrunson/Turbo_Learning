@@ -16,6 +16,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.metrics import classification_report
 import tensorflow as tf
 from scipy import stats
 
@@ -47,7 +48,7 @@ data_df = pd.read_csv('Resources/Texas_combined_final.csv')
 # This allows us to bin easily but also treat "time" as a continuous feature more easily should we choose
 def time_convert(x):
     h,m,s = map(int,x.split(':'))
-    return (m*60)+s
+    return (h*360)+(m*60)+s
 
 data_df['seconds_in_quarter_remaining'] = data_df.clock.apply(time_convert)
 
@@ -82,7 +83,10 @@ data_df['time_remaining_binned'] = pd.cut(data_df['seconds_in_half_remaining'], 
 #%%
 # Convert all pass outcomes to "pass" to create a true binary outcome
 data_df.loc[data_df['type'].str.contains('Pass'), 'type'] = 'Pass'
+data_df.loc[data_df['type'].str.contains('Rushing'), 'type'] = 'Rush'
 
+#%%
+data_df.type.value_counts()
 #%%
 # Drop Output label into separate object
 output_df = data_df.type
@@ -139,8 +143,17 @@ rf_model = RandomForestClassifier(n_estimators=128, random_state=42)
 rf_model = rf_model.fit(X_train_scaled, y_train)
 
 # Evaluate the model
+# Classification 
+# Loop through DF column keys, plot scatter for each to check distribution to check for normalcy and uniformity
+# Genie measuring average amount of error based on splitting on certain column
+# Information gained based on splitting on a column
+# Check Pearson, eigens
+# Establish a baseline with linear regression / multiple
+# Set features available for clustering for K Means to get the number of optimal features
+# Stacking as a feature tool
 y_pred = rf_model.predict(X_test_scaled)
 print(f" Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.4f}")
+print(classification_report(y_test,y_pred))
 
 #%%
 # Create model architecture
