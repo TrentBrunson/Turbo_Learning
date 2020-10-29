@@ -3,7 +3,7 @@ import pandas as pd
 
 #%%
 #Bring in combined csv
-cfb_df = pd.read_csv('Texas_combined.csv')
+cfb_df = pd.read_csv('Texas_combined_small.csv')
 
 #%%
 #Create a unique ID with the ID and indexes provided
@@ -24,6 +24,10 @@ cfb_df.index.name = "playID"
 cfb_df = cfb_df.replace("Bowl",16)
 
 #%%
+# Creates game clock in mm:ss format
+cfb_df['clock'] = pd.to_datetime(cfb_df['clock'], format='%M:%S').dt.time
+
+#%%
 #Creates a new data frame to store score data for transformation in SQL
 cfb_score_df = cfb_df[["homeAbbr","awayAbbr","homeScore","awayScore"]].copy()
 
@@ -34,4 +38,3 @@ cfb_df = cfb_df.drop(["driveIndex","playIndex","homeAbbr","awayAbbr","homeScore"
 #Saves new tables as csv files
 cfb_df.to_csv('Resources/Texas_combined_formatted.csv', index=True)
 cfb_score_df.to_csv('Resources/Texas_scores.csv', index=True)
-# %%

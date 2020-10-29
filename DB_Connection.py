@@ -24,6 +24,16 @@ Base.classes.keys()
 session = Session(engine)
 
 #%%
-df = pd.read_sql_table('tex_pbp', engine)
-df.head()
+df = pd.read_sql_table('tex_combined_final', engine)
+df.tail()
+
+#%%
+df = df.set_index("playid", drop = True)
+df.index.name = "playID"
+
+# %%
+df.dtypes
+# %%
+df['clock'] = pd.to_datetime(df['clock'], format='%H:%M:%S').dt.time
+
 # %%

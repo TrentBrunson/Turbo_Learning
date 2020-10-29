@@ -1,5 +1,5 @@
-SELECT * FROM Tex_Opp_score;
 SELECT * FROM TEX_PBP;
+SELECT * FROM Tex_Opp_score;
 
 -- Add Columns for Texas Score and Opponent Score
 ALTER TABLE Tex_Opp_Score
@@ -31,9 +31,10 @@ FROM tex_pbp as pbp
 LEFT JOIN tex_opp_score as s
 ON pbp.playId = s.playId;
 
-SELECT * from Tex_combined_final;
-
-DROP TABLE;
+-- Final Table
+SELECT * FROM Tex_combined_final;
+ALTER TABLE Tex_combined_final ADD CONSTRAINT pk_Tex_combined_final 
+	PRIMARY KEY (playId);
 
 rollback;
 commit;
