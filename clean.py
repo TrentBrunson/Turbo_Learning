@@ -53,7 +53,7 @@ def combine_years(year):
 
     # get right columns for each year - dropping doesn't work because 2014 has issues
     # specfically found week 6 to be problematic; dropped one line of data & it works
-    year_data = year_data[['gameId', 'year', 'week', 'homeAbbr', 'awayAbbr', 
+    year_data = year_data[['gameId', 'driveIndex', 'playIndex', 'year', 'week', 'homeAbbr', 'awayAbbr', 
     'offenseAbbr', 'defenseAbbr', 'homeScore', 'awayScore', 'quarter', 'clock', 
     'type', 'down', 'distance', 'yardLine', 'yardsGained']]
 
@@ -95,3 +95,4 @@ for f in glob.glob("dataRaw/tex/*.csv"):
 
 df_combined.to_csv('Texas_combined_small.csv', index=False)
 df_combined.shape # check that dataframe shape makes sense after years are combined
+# %%
