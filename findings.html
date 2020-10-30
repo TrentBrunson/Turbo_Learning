@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>University of Texas Play Caller</title>
+    <!-- accessing Bootstrap content delivery network (CDN) -->
+    <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+    />
+    <!-- linking to stylesheet location, CSS -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="images/UTfootballLogo.jpg">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">University of Texas Football - Defensive Play Caller</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/findings">Findings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/methodology">Methodology</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container"><br>
+        <h2><b>Findings</b></h2>
+        <hr>
+    <div class="container">
+        <div class="row">
+            <h3>Model Findings</h3>
+        </div>
+        <div>
+            <p>Goal was to predict what the opposing team would call in a given game time situation, then recommend the type of defense to call for the University of Texas.
+                did some awesome stuff with models; here are the top features used:</p>
+            <br>
+        </div>
+        <div class="row">
+            <h4>Feature Choices</h4>
+        </div>
+        <div>
+            <ul>
+                <li>Half</li>
+                <li>Time Remaining</li>
+                <li>Down</li>
+                <li>Distance to go</li>
+            </ul><br>
+        </div>
+        <div class="row"><h4>Random Forest Classifier</h4></div><br>
+        <div class="row">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
+                culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="row"><h4>Multiple Linear Regression</h4></div><br>
+        <div class="row">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
+                culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="row"><h4>K-Means</h4></div><br>
+        <div class="row">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
+                culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="row "><h4>PCA stuff</h4></div><br>
+        <div class="row">
+            <p>some text about the model used</p>
+        </div>
+        <div class="row "><h4>Selected model</h4></div><br>
+        <div class="row">
+            <p>Limitations of the model selected.  
+            Strengths of model chosen</p>
+        </div>
+        <div class="row "><h4>Recommendations for future development</h4></div><br>
+        <div class="row">
+            <p>some text about the model used</p>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script type="text/javascript" src="static/js/logic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- <script src="plots.js"></script> -->
+</body>
+
+</html>
