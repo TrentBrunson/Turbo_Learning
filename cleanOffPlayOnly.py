@@ -10,7 +10,7 @@ from config import db_password
 # %%
 # set end and start values at the beginning
 # no need to make this a user input
-start_year = 2016
+start_year = 2015
 end_year = 2018
 
 # set up data folder to temp hold intermediate data processing step
@@ -53,7 +53,7 @@ def combine_years(year):
 
     # get right columns for each year - dropping doesn't work because 2014 has issues
     # specfically found week 6 to be problematic; dropped one line of data & it works
-    year_data = year_data[['gameId', 'year', 'week', 'homeAbbr', 'awayAbbr', 
+    year_data = year_data[['gameId', 'year', 'week', 'driveIndex', 'playIndex','homeAbbr', 'awayAbbr', 
     'offenseAbbr', 'defenseAbbr', 'homeScore', 'awayScore', 'quarter', 'clock', 
     'type', 'down', 'distance', 'yardLine', 'yardsGained']]
 
@@ -64,6 +64,10 @@ def combine_years(year):
     df_Tex_plays = Tex_data[(Tex_data.type.str.contains('Pass', regex=False)) | (
         Tex_data.type.str.contains('Rush', regex=False))]
     
+    # get only opponent offensive plays - only seeking to predict defense play call for TX
+    df_Tex_plays = df_Tex_plays[(Tex_data.defenseAbbr.str.contains('TEX', regex=False))]
+
+    # put DF into csv
     csv_path = f"dataRaw/tex/Tex_data{year}.csv"
     df_Tex_plays.to_csv(csv_path, sep= ',', index= False)
 
@@ -74,8 +78,8 @@ def combine_years(year):
         f'\n---------------------------------------------------\n'
     )
 
-    # make sure that when pulling in only Texas data, it was fine
-    evaluate_data(Tex_data)
+    # make sure that when pulling in only Texas data, it was fine; comment out after initial run
+    # evaluate_data(Tex_data)
 
     # verfying that filtering down to only offensive plays worked
     evaluate_data(df_Tex_plays)
@@ -86,12 +90,14 @@ def combine_years(year):
 for i in range (start_year, end_year+1):
     combine_years(i)
 # %%
-# combine tex folder files into one and save in main directory 
-# that will be published to github
+# combine tex folder files into one and save in main directory that will be published to github
 df_combined = pd.DataFrame()  # initialize dataframe
-for f in glob.glob("dataRaw/tex/*.csv"):
+for f in glob.glob("dataRaw/tex/*.csv"): #loop through all files in tex folder and combine
     df = pd.read_csv(f)
     df_combined = df_combined.append(df,ignore_index=True)
 
-df_combined.to_csv('Texas_combined_small.csv', index=False)
+df_combined.to_csv('data/Texas_combined_small.csv', index=False)
 df_combined.shape # check that dataframe shape makes sense after years are combined
+# %%
+# check that only have plays for Texas while on defense
+df_combined.defenseAbbr.unique()
