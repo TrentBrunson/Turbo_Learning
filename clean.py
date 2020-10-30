@@ -95,4 +95,3 @@ for f in glob.glob("dataRaw/tex/*.csv"):
 
 df_combined.to_csv('Texas_combined_small.csv', index=False)
 df_combined.shape # check that dataframe shape makes sense after years are combined
-# %%
