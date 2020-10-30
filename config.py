@@ -1,1 +1,0 @@
-DB_String = "postgres://ttsskopxdmnsfo:4378043c6d59d120e32dd53458a7b496edba8ae3199207429f3709d03c59db82@ec2-52-203-165-126.compute-1.amazonaws.com:5432/d4arif9evev4vq"
