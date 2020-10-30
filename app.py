@@ -29,7 +29,6 @@ def predict():
     """***---???---***"""
     """***---???---***"""
     """***---???---***"""
-    """***---???---***"""
 
     # take inputs and put into array, ready for ML model
     feature_list = [down, distance, quarter, clock]
