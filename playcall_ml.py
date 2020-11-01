@@ -1,6 +1,7 @@
 #%%
 # Import dependencies
 import pandas as pd
+from datetime import datetime
 
 # Python SQL toolkit and Object Relational Mapper
 import sqlalchemy
@@ -38,20 +39,15 @@ Base.classes.keys()
 session = Session(engine)
 
 #%%
-df = pd.read_sql_table('tex_combined_final', engine)
-df.tail()
+data_df = pd.read_sql_table('tex_combined_final', engine)
 
 #%%
-df = df.set_index("playid", drop = True)
-df.index.name = "playID"
-
-# %%
-df['clock'] = pd.to_datetime(df['clock'], format='%H:%M:%S').dt.time
-df.dtypes
+data_df = data_df.set_index("playid", drop = True)
+data_df.index.name = "playID"
 
 #%%
-df['seconds_in_quarter_remaining'] = data_df['clock'].dt.total_seconds()
-
+data_df['clock'] = data_df['clock'].astype(str)
+data_df.dtypes
 #%%
 # Creating a 'time remaining in quarter' column 
 # This allows us to bin easily but also treat "time" as a continuous feature more easily should we choose
@@ -95,12 +91,10 @@ data_df.loc[data_df['type'].str.contains('Pass'), 'type'] = 'Pass'
 data_df.loc[data_df['type'].str.contains('Rushing'), 'type'] = 'Rush'
 
 #%%
-data_df.type.value_counts()
-#%%
 # Drop Output label into separate object
 output_df = data_df.type
-features_df = data_df[['year', 'offenseabbr','defenseabbr', 'texscore','oppscore','quarter','down','distance','yardline','half', 'time_remaining_binned']]
-
+features_df = data_df[['offenseabbr','texscore','oppscore','quarter','down','distance','yardline','half', 'time_remaining_binned']].reset_index()
+features_df = features_df.drop(columns = ['playID'])
 #%%
 # Check categorical columns of feature df and check the number of unique values in each column
 data_cat = features_df.dtypes[features_df.dtypes == "object"].index.tolist()
@@ -128,6 +122,7 @@ encoded_features_df = encoded_features_df.drop(data_cat,1)
 #Split into testing and training groups
 X = encoded_features_df
 y = output_df
+#%%
 # Split training/test datasets
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=24)
 
@@ -152,33 +147,6 @@ rf_model = RandomForestClassifier(n_estimators=128, random_state=42)
 rf_model = rf_model.fit(X_train_scaled, y_train)
 
 # Evaluate the model
-# Classification 
-# Loop through DF column keys, plot scatter for each to check distribution to check for normalcy and uniformity
-# Check Run/Pass based on yard to go, check Run/Pass based on down
-# Genie measuring average amount of error based on splitting on certain column
-# Information gained based on splitting on a column
-# Check Pearson, eigens
-# Establish a baseline with linear regression / multiple
-# Set features available for clustering for K Means to get the number of optimal features
-# Stacking as a feature tool
 y_pred = rf_model.predict(X_test_scaled)
 print(f" Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.4f}")
 print(classification_report(y_test,y_pred))
-
-#%%
-# Create model architecture
-
-#%%
-# Add density to model architecture
-
-
-#%%
-#Compile model
-
-
-#%%
-# Fit the model to the training data
-
-
-#%%
-# Evaluate the model using the test data
