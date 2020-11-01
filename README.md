@@ -61,6 +61,7 @@ For this segment, we have completed a storybaord of what will become our dashabo
   * Clean and interactive 
   * Contains a navigation bar linking to the Methodology and Machine Learning Model Findings
   * Top section explans the purpose of the dashboard and entices users to use our predicting model 
+  
 2.) User Input Sidebar
   * In a left sidebar, the user input fields allow for data entry. Once data is entered, the user presses the “Call Play” button to activate our ML model, allowing the user to   predict the next defensive play call
 
