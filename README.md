@@ -38,11 +38,41 @@ Please view our ongoing team presentation draft here: https://docs.google.com/pr
 
 The presentation outlines the project, including the following: 
 Selected topic
-  * Reason why we selected our topic 
-  * Description of our source of data
-  * Questions we hope to answer with the data
-  * Description of the data exploration phase of the project
-  * Description of the analysis phase of the project
+* Reason why we selected our topic 
+* Description of our source of data
+* Questions we hope to answer with the data
+* Description of the data exploration phase of the project
+* Description of the analysis phase of the project
+
+### Dashboard 
+For this segment, we have completed a storybaord of what will become our dashabord, listed our tools and determined the interactive features. See below for a full description of our storyboard and working plan. 
+
+#### Tools Used:
+* HTML
+* Bootstrap
+* CSS
+* Heroku
+
+#### Outline
+
+![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Dashboard-1.PNG)
+
+1.) Landing Page
+  * Clean and interactive 
+  * Contains a navigation bar linking to the Methodology and Machine Learning Model Findings
+  * Top section explans the purpose of the dashboard and entices users to use our predicting model 
+2.) User Input Sidebar
+  * In a left sidebar, the user input fields allow for data entry. Once data is entered, the user presses the “Call Play” button to activate our ML model, allowing the user to   predict the next defensive play call
+
+![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Dashboard-2.PNG)
+
+3.) Results displayed 
+  * After the user prompts a prediction from the ML model by pressing the “Call Play” button, a probability of plays will be shown via a heatmap chart
+  * Color coding will allow users to have a more user-friendly experience and fast response 
+
+![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Dashboard-3.PNG)
+
+![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Dashboard-5.PNG)
 
 
 
