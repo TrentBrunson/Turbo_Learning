@@ -31,5 +31,21 @@ After completing the project, we hope to be able to answer the following questio
 * What is the likelihood that the opposing team will call on a "run" or "pass" based on the play, distance or time?
 * Are there any variables that have a greater affect on the decision call? If so, what are they? 
 
+## Segment 2
+
+### Presentation 
+Please view our ongoing team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
+
+The presentation outlines the project, including the following: 
+Selected topic
+  * Reason why we selected our topic 
+  * Description of our source of data
+  * Questions we hope to answer with the data
+  * Description of the data exploration phase of the project
+  * Description of the analysis phase of the project
+
+
+
+
 
 
