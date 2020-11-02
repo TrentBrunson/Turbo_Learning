@@ -73,8 +73,11 @@ For this segment, we have completed a storybaord of what will become our dashabo
 
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Dashboard-3.PNG)
 
+4.)For the data geek, we included a Methodology page for users to learn more about the model used, its outcomes and limitations, as well as data processing and development. 
+
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Dashboard-5.PNG)
 
+5.) Lastly, we’ve included a Findings page dedicated to the evaluation of the model and recommendations for future development.
 
 
 
