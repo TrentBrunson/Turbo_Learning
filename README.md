@@ -148,7 +148,7 @@ Code in ‘feature_analysis.py’ and ‘featureMap.py’.
     
   * **Limitations** - the “black box” issue. While there are options available for feature analysis when preparing the data, once the model is making its decisions, it’s tough       to tell what actions it’s taking. The best way to counteract that is to have good data in. Additionally, RF models aren’t as prone to overfitting as other choices, meaning       this model could likely be extended outside of our limited scope.
   
-* Iterations
+* **Iterations**
   * 1st - Random Forest, Binned time, non-binned “distance”, kept “week”
     Accuracy score: 0.6272
   * 2nd - Random Forest, Binned time, non-binned “distance”, dropped “week”
