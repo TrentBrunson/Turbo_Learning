@@ -117,7 +117,7 @@ Code in ‘feature_analysis.py’ and ‘featureMap.py’.
   * Feature ‘year’ (dropped) - Similar to the reasoning behind ‘week’ being dropped. Additionally, in preliminary feature analysis, year wasn’t a huge driver of change.
   
 * **Feature Important Analysis** - These results fit well with the information gathered by the Seaborn heatmap. Code written in ‘featuer_analysis.py’ and ‘featureMap.py’
-  * Linear Regression Feature Importance - By using the LinearRegression method from sklearn, and fitting the data to the model, we reveal that the most impactful features are       ‘quarter’, ‘down’, and ‘distance’ aligning with what we see with the Seaborn Heatmap.
+  * **Linear Regression Feature Importance** - By using the LinearRegression method from sklearn, and fitting the data to the model, we reveal that the most impactful features are       ‘quarter’, ‘down’, and ‘distance’ aligning with what we see with the Seaborn Heatmap.
        
        ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/LinearRegressionFeatureImportance.png)
 
