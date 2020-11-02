@@ -45,6 +45,15 @@ Selected topic
 * Description of the analysis phase of the project
 
 ### Database
+For our database, we used **Heroku** to store our data. Our decision to use this cloud platform was due to the dynamic features and its free of cost offerings. 
+
+Detailed below is our ERD:
+
+![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/DB/QuickDBD-CFB_DB.png)
+
+During our data exploration, we identified a primary key, joined tables to more accurately represent the data, dropped duplicates and narrowed the number of years and attributes to test, based of what we found to be of highest importance. 
+
+![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Database-1.PNG)
 
 
 ### Dashboard 
