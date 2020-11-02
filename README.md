@@ -84,14 +84,14 @@ For this segment, we have completed a storybaord of what will become our dashabo
 
 ### Machine Learning & Analysis
 
-* Preprocessing - coded in ‘clean.py’
+* **Preprocessing** - coded in ‘clean.py’
   * Used the ‘glob’ method to combine years of data into a single dataframe.
   * Initial columns kept: 'gameId', 'driveIndex', 'playIndex', 'year', 'week', 'homeAbbr', 'awayAbbr', 'offenseAbbr', 'defenseAbbr', 'homeScore', 'awayScore', 'quarter', 'clock',    'type', 'down', 'distance', 'yardLine', 'yardsGained'.
   * Dropped N/A values along with one duplicate discovered in the ‘2014’ row.
   * Transformed related columns to be specific to their relation to Texas -- aligning with the stated goal of prediction plays of Texas’ opponents.
   * Plays that did not result in a Rush or Pass (i.e. penalties, timeouts, etc.) were removed.
 
-* Feature Engineering - coded at the top of ‘playcall_ml.py’
+* **Feature Engineering** - coded at the top of ‘playcall_ml.py’
   * Converts ‘clock’ from HH MM SS datetime format to an integer of total seconds.
     * Allows us to bin the results or treat as a continuous value.
     * Converted to ‘seconds_in_quarter_remaining’, used the ‘quarter’ value to convert to ‘seconds_in_half_remaining’, and ultimately binned to 'time_remaining_binned'
@@ -103,7 +103,7 @@ For this segment, we have completed a storybaord of what will become our dashabo
   * Categorical and Object datatyped features or encoded using the OneHotEncoder method from sklearn.
       * Subsequent columns are then remerged with the original dataset and the original columns are dropped.
       
-* Feature Analysis and subsequent selection / removal - *decisions on which columns make it to the feature dataframe and which are ultimately dropped. 
+* **Feature Analysis and subsequent selection / removal** - *decisions on which columns make it to the feature dataframe and which are ultimately dropped. 
 Code in ‘feature_analysis.py’ and ‘featureMap.py’.
   * Feature ‘texscore’ & ‘oppscore’ (used) - in conjunction, these two features help determine if a team needs to score quickly -- leading to more passing -- or whether they         want to ‘run out the clock’ -- leading to more run plays.
   * Feature ‘clock’ transformed into ‘time_remaining_in_half” (used) - This allows us to both bin easily and treat it as a continuous feature should it be more beneficial to the 
@@ -116,25 +116,26 @@ Code in ‘feature_analysis.py’ and ‘featureMap.py’.
     that will stay consistent across teams or years and the inclusion could result in overfitting.
   * Feature ‘year’ (dropped) - Similar to the reasoning behind ‘week’ being dropped. Additionally, in preliminary feature analysis, year wasn’t a huge driver of change.
   
-* Feature Important Analysis - These results fit well with the information gathered by the Seaborn heatmap. Code written in ‘featuer_analysis.py’ and ‘featureMap.py’
+* **Feature Important Analysis** - These results fit well with the information gathered by the Seaborn heatmap. Code written in ‘featuer_analysis.py’ and ‘featureMap.py’
   * Linear Regression Feature Importance - By using the LinearRegression method from sklearn, and fitting the data to the model, we reveal that the most impactful features are       ‘quarter’, ‘down’, and ‘distance’ aligning with what we see with the Seaborn Heatmap.
        
        ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/LinearRegressionFeatureImportance.png)
 
-  * CART Classification Feature Importance - A little bit of a different story here with the ‘quarter’, ‘down’, and ‘distance’ being featured less importantly in the model. WIth     the growth of the other features, however, it could be an indication that they’re worth keeping in the model. 
+  * **CART Classification Feature Importance** - A little bit of a different story here with the ‘quarter’, ‘down’, and ‘distance’ being featured less importantly in the model.     With the growth of the other features, however, it could be an indication that they’re worth keeping in the model. 
        
        ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/CART%20Classification%20Feature%20Importance.png)
 
-  * RF Classifier Feature Importance - This is where we’re starting to see some consistency with feature importance. First, it’s notable that a majority of the features chosen  
-    are having an impact. ‘half’ may warrant a second look given it’s low score compared to the others. 
+  * **RF Classifier Feature Importance** - This is where we’re starting to see some consistency with feature importance. First, it’s notable that a majority of the features    
+    chosen are having an impact. ‘half’ may warrant a second look given it’s low score compared to the others. 
        
        ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/RFClassifierFeatureImportance.png)
        
-  * RF Regression Feature Importance - Very consistent with the analysis above. The change of note is the increase in ‘quarter’, ‘down’, and to a smaller extent ‘distance’ which     aligns with what we’re seeing with earlier analysis.
+  * **RF Regression Feature Importance** - Very consistent with the analysis above. The change of note is the increase in ‘quarter’, ‘down’, and to a smaller extent ‘distance’  
+     which aligns with what we’re seeing with earlier analysis.
        
        ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/RFRegressionFeatureImportance.png)
   
-* Train, Test, Split - how the dataset was split for training and testing purposes.
+* **Train, Test, Split** - how the dataset was split for training and testing purposes.
   * Using the train_test_split method from sklearn, the data was split to allow for **75%** to be used for training, and **25%** to be used to test accuracy, precision, and    
     recall for the model.
   * No need to stratify as the output variables are near 50/50 splits.
@@ -147,7 +148,7 @@ Code in ‘feature_analysis.py’ and ‘featureMap.py’.
     
   * **Limitations** - the “black box” issue. While there are options available for feature analysis when preparing the data, once the model is making its decisions, it’s tough       to tell what actions it’s taking. The best way to counteract that is to have good data in. Additionally, RF models aren’t as prone to overfitting as other choices, meaning       this model could likely be extended outside of our limited scope.
   
-* *Iterations
+* Iterations
   * 1st - Random Forest, Binned time, non-binned “distance”, kept “week”
     Accuracy score: 0.6272
   * 2nd - Random Forest, Binned time, non-binned “distance”, dropped “week”
