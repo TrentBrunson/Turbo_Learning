@@ -1,15 +1,6 @@
 #%%
 # Import dependencies
 import pandas as pd
-from datetime import datetime
-
-# Python SQL toolkit and Object Relational Mapper
-import sqlalchemy
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
-from config import DB_String
-#from config import DB_String
 
 # ML dependencies
 import sklearn as skl
@@ -19,35 +10,23 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import classification_report
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn import preprocessing
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
+from graphviz import Source
 import tensorflow as tf
 from scipy import stats
 
-#%%
-engine = create_engine(DB_String)
-
-# reflect an existing database into a new model
-Base = automap_base()
-# reflect the tables
-Base.prepare(engine, reflect=True)
+# Feature plotting dependencies
+import matplotlib.pyplot as plt
 
 #%%
-# We can view all of the classes that automap found
-Base.classes.keys()
+# Import clean dataset from raw file
+data_df = pd.read_csv('Resources/Texas_combined_final.csv')
 
-#%%
-# Create our session (link) from Python to the DB
-session = Session(engine)
-
-#%%
-data_df = pd.read_sql_table('tex_combined_final', engine)
-
-#%%
-data_df = data_df.set_index("playid", drop = True)
-data_df.index.name = "playID"
-
-#%%
-data_df['clock'] = data_df['clock'].astype(str)
-data_df.dtypes
 #%%
 # Creating a 'time remaining in quarter' column 
 # This allows us to bin easily but also treat "time" as a continuous feature more easily should we choose
@@ -93,8 +72,15 @@ data_df.loc[data_df['type'].str.contains('Rushing'), 'type'] = 'Rush'
 #%%
 # Drop Output label into separate object
 output_df = data_df.type
-features_df = data_df[['offenseabbr','texscore','oppscore','quarter','down','distance','yardline','half', 'time_remaining_binned']].reset_index()
-features_df = features_df.drop(columns = ['playID'])
+features_df = data_df[['texscore','oppscore','quarter','down','distance','yardline','half']]
+
+#%%
+le = preprocessing.LabelEncoder()
+#%%
+le.fit(output_df)
+#%%
+output_df = le.transform(output_df)
+
 #%%
 # Check categorical columns of feature df and check the number of unique values in each column
 data_cat = features_df.dtypes[features_df.dtypes == "object"].index.tolist()
@@ -117,36 +103,81 @@ encode_df.columns = enc.get_feature_names(data_cat)
 # Merge encoded DataFrame back into the original feature df and drop original object/category columns
 encoded_features_df = features_df.merge(encode_df,left_index=True, right_index=True)
 encoded_features_df = encoded_features_df.drop(data_cat,1)
-
-#%%
-#Split into testing and training groups
-X = encoded_features_df
+# %%
+X = features_df
 y = output_df
-#%%
-# Split training/test datasets
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=24)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=24, stratify=y)
+# %%
+classifier = LogisticRegression(solver='lbfgs', random_state=24)
+classifier
+# %%
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True, intercept_scaling=1, max_iter=100, multi_class='warn', n_jobs=None, penalty='12', random_state=1, solver='lbfgs', tol=0.0001, verbose=0, warm_start=False)
+# %%
+classifier.fit(X_train, y_train)
 
 #%%
-#Scale data based on testing group and apply to testing and training
-# Create a StandardScaler instance
-scaler = StandardScaler()
-
-# Fit the StandardScaler
-X_scaler = scaler.fit(X_train)
-
-# Scale the data
-X_train_scaled = X_scaler.transform(X_train)
-X_test_scaled = X_scaler.transform(X_test)
+predictions = classifier.predict(X_test)
+pd.DataFrame({"Prediction": predictions, "Actual": y_test})
+# %%
+accuracy_score(y_test, predictions)
 
 #%%
-# 1st Random Forest Model
-# Create a random forest classifier.
-rf_model = RandomForestClassifier(n_estimators=128, random_state=42)
+# Linear Regression for feature importance
+# Define the linear regression model
+model = LinearRegression()
+# fit the model
+model.fit(X, output_df)
+# Set variable for importance
+importance = model.coef_
+# summarize feature importance
+for i,v in enumerate(importance):
+	print('Feature: %0d, Score: %.5f' % (i,v))
+# plot feature importance
+plt.bar([x for x in range(len(importance))], importance)
+plt.xlabel(['texscore','oppscore','quarter','down','distance','yardline','half'])
+plt.savefig('./images/linearFeatureImportance.png')
+# %%
+# CART Feature Importance
+tree_model = DecisionTreeRegressor()
+# %%
+tree_model.fit(X, y)
+# %%
+tree_importance = tree_model.feature_importances_
+# summarize feature importance
+for i,v in enumerate(tree_importance):
+	print('Feature: %0d, Score: %.5f' % (i,v))
+# plot feature importance
+plt.bar([x for x in range(len(tree_importance))], tree_importance)
+plt.xlabel(['texscore','oppscore','quarter','down','distance','yardline','half'])
+plt.savefig('./images/CARTFeatureImportance.png')
 
-# Fitting the model
-rf_model = rf_model.fit(X_train_scaled, y_train)
+# %%
+# Random Forest Regression
+random_forest_model = RandomForestRegressor()
 
-# Evaluate the model
-y_pred = rf_model.predict(X_test_scaled)
-print(f" Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.4f}")
-print(classification_report(y_test,y_pred))
+random_forest_model.fit(X, y)
+
+forest_importance = random_forest_model.feature_importances_
+
+for i,v in enumerate(forest_importance):
+	print('Feature: %0d, Score: %.5f' % (i,v))
+
+plt.bar([x for x in range(len(forest_importance))], forest_importance)
+plt.xlabel(['texscore','oppscore','quarter','down','distance','yardline','half'])
+plt.savefig('./images/RF_Regression_FeatureImportance.png')
+# %%
+# Random Forest Classification
+rf_class_model = RandomForestClassifier()
+# fit the model
+rf_class_model.fit(X, y)
+# get importance
+rf_importance = rf_class_model.feature_importances_
+# summarize feature importance
+for i,v in enumerate(rf_importance):
+	print('Feature: %0d, Score: %.5f' % (i,v))
+# plot feature importance
+plt.bar([x for x in range(len(rf_importance))], rf_importance)
+plt.xlabel(['texscore','oppscore','quarter','down','distance','yardline','half'])
+plt.savefig('./images/RF_Classification_FeatureImportance.png')
+# %%
