@@ -25,7 +25,7 @@ def predict():
 
     # convert clock to something the ML model can take in
     # how is ML model using time???
-    # bin it - pick midpoint of
+    # bin it - pick midpoint of each bin for value?
     """***---???---***"""
     """***---???---***"""
     """***---???---***"""
@@ -38,7 +38,7 @@ def predict():
 
     # use pickle or H5?????
     # load H5 from sklearn/pandas pd.read_hdf
-    model = pickle.load(open('random_forest/random_forest.pkl'))
+    model = pickle.load(open('???model.pkl'))
     prediction = model.predict(features)
     output = prediction[0]
 
@@ -57,5 +57,6 @@ def findings():
 @app.route('/methodology')
 def methodology():
     return render_template('methodology.html')
+
 if __name__ == "__main__":
     app.run()
