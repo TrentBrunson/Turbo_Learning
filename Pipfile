@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+gunicorn = "*"
+flask = "*"
+flask-pymongo = "*"
+splinter = "*"
+bs4 = "*"
+pandas = "*"
+psycopg2 = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
+
+[requires]
+python_version = "3.7"
