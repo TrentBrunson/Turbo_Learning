@@ -19,6 +19,27 @@ def predict():
     down = request.form['down']
     distance = request.form['distance']
 
+    # convert strings to numbers
+    quarter = int(quarter)
+    clock = int(clock)
+    down = int(down)
+    distance = int(distance)
+
+    # change quarters to halves
+    if quarter <= 2:
+        half = 1
+    elif quarter == 5:
+        half = 3
+    else:
+        half = 2
+
+    # convert clock to seconds so the ML model can take it in
+    if half == 1:
+        clockSeconds = clock * 60
+    elif half == 2:
+        clockSeconds = clock * 60 * 2
+    else:
+        clockSeconds = clock * 60 * 3
 
     # take inputs and put into array, ready for ML model
     feature_list = [half, clockSeconds, down, distance]
