@@ -4,10 +4,6 @@ import pickle
 import numpy as np
 from flask import Flask, render_template, request, redirect
 
-def time_convert(x):
-    h,m,s = map(int,x.split(':'))
-    return (h*360)+(m*60)+s
-
 app = Flask(__name__)
 # start home page
 @app.route("/")
