@@ -15,7 +15,7 @@
     />
     <!-- linking to stylesheet location, CSS -->
     <link rel="stylesheet" href="../static/css/style.css">
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
     <link rel="shortcut icon" type="image/ico" href="../images/UTfootballLogo.jpg">
 </head>
 
@@ -61,7 +61,7 @@
     <div class="container-fluid"> 
         <div class="row">
             <div class="col-md-4">
-                <form class="bg-light">
+                <form class="bg-light" action="/predict" method="POST">
                     <p><b>Current Play</b></p>
                     <ul class="list-group">
                         <li class="list-group-item">
