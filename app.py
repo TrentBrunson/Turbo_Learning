@@ -68,4 +68,6 @@ def methodology():
     return render_template('methodology.html')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
+
+import pdb; pdb.set_trace()
