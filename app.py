@@ -1,6 +1,7 @@
 # coding: utf-8
 
-import pickle
+# import tensorflow as tf
+from tensorflow import keras
 import numpy as np
 from flask import Flask, render_template, request, redirect
 
@@ -48,7 +49,7 @@ def predict():
 
     # use pickle or H5?????
     # load H5 from sklearn/pandas pd.read_hdf
-    model = pickle.load(open('???model.pkl'))
+    model = keras.models.load_model( 'model.h5' )
     prediction = model.predict(features)
     output = prediction[0]
 
@@ -58,7 +59,7 @@ def predict():
     else:
         result = 'Rush'
 
-    return render_template('index.htnml', call = result)
+    return render_template('index.html', call = '{result} defense!')
 
 @app.route('/findings')
 def findings():
