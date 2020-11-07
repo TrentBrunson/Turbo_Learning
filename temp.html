@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>University of Texas Play Caller</title>
+    <!-- accessing Bootstrap content delivery network (CDN) -->
+    <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+    />
+    <!-- linking to stylesheet location, CSS -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+    <link rel="shortcut icon" type="image/ico" href="../images/UTfootballLogo.jpg">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand navbar-left" href="/">University of Texas Football - Defensive Play Caller</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav navbar-right">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/findings">Findings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/methodology">Methodology</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron jumbotron-fluid my-2">
+        <div class="container my-0">
+            <div class="row my-0">
+                <h1>Welcome to the UT Play Caller</h1>
+                <p class="lead text-left">
+                   <b> Calling the right play is key to winning.  Want some help?  
+                    Checkout this defensive play caller.  Why defense?  Offense wins
+                    games, DEFENSE wins championships!!!</b> <br><br>If you want to know more, 
+                    check out our 
+                    <a href="/methodology">methodology</a>
+                     and read the 
+                    <a href="/findings">findings</a>
+                    pages.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid"> 
+        <div class="row">
+            <div class="col-md-4">
+                <form action="/predict" method="POST">
+                <!-- <form class="bg-light" action="/predict" method="POST"> -->
+                    <p><b>Current Play</b></p>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <label for="quarter">Enter Quarter</label>
+                            <select name="quarter" id="quarter_select">
+                                <option value="1">1</option>
+                                <option value="1">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">OT</option>
+                            </select>
+                        </li>
+                        <li class="list-group-item bg-light">
+                            <div>
+                                <label for="clock">Enter Time Remaining in Quarter</label>
+                                <select name="clock" id="clock_select">
+                                    <option value="15">14-15</option>
+                                    <option value="13">12-14</option>
+                                    <option value="11">10-12</option>
+                                    <option value="9">8-10</option>
+                                    <option value="7">6-8</option>
+                                    <option value="5">4-6</option>
+                                    <option value="3">2-4</option>
+                                    <option value="1">0-2</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <label for="down">Enter Down</label>
+                            <input type="number" value="1" name= "down" id="down_select" min="1" max="4"/>
+                        </li>
+                        <li class="list-group-item bg-light">
+                            <label for="distance">Enter Yards to Go</label>
+                            <input type="number" name="distance" id="yards_to_go" value="10"/>
+
+                            <!-- <select  id="distance">
+                                <option value="0-3">0-3</option>
+                                <option value="3-6">3-6</option>
+                                <option value="6-9">6-9</option>
+                                <option value="9-12">9-12</option>
+                                <option value="12-15">12-15</option>
+                                <option value="15-20">15-20</option>
+                                <option value="20+">20+</option>
+                            </select> -->
+
+                        </li>
+                        <li class="list-group-item bg-dark text-center">
+                            <button id="filter-btn" type="submit" class="btn btn-dark text-large">
+                                <h3><b>Call Play</b></h3>
+                            </button>
+                        </li><br>
+                    </ul>
+                </form>
+                <div>
+                    <h4>
+                        <p><b>You need to call a: 
+                            <h2>
+                                <p class="text-success">{{ call }}</p>
+                            </h2>
+                        </b></p>
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <p><b>Cool features about the next play - or table of plays</b></p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Half</th>
+                            <th>Time Remaining in Half</th>
+                            <th>Down</th>
+                            <th>Distance</th>
+                            <th>Other Feature???</th>
+                            <th>Type</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
