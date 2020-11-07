@@ -1,7 +1,6 @@
 # coding: utf-8
 
 import pickle
-from tensorflow import keras
 import numpy as np
 from flask import Flask, render_template, request, redirect
 
