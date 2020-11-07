@@ -4,13 +4,10 @@ import pickle
 import numpy as np
 from flask import Flask, render_template, request, redirect
 
-def time_convert(x):
-    h,m,s = map(int,x.split(':'))
-    return (h*360)+(m*60)+s
-
 app = Flask(__name__)
+
 # start home page
-@app.route("/")
+@app.route('/')
 def index():
     return render_template('index.html')
 
@@ -18,37 +15,51 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
     # get user inputs
-    distance = request.form['distance']
-    down = request.form['down']
     quarter = request.form['quarter']
     clock = request.form['clock']
+    down = request.form['down']
+    distance = request.form['distance']
 
-    # convert clock to something the ML model can take in
-    # how is ML model using time???
-    # bin it - pick midpoint of each bin for value?
-    """***---???---***"""
-    """***---???---***"""
-    """***---???---***"""
+    # convert strings to numbers
+    quarter = int(quarter)
+    clock = int(clock)
+    down = int(down)
+    distance = int(distance)
+
+    # change quarters to halves
+    if quarter <= 2:
+        half = 1
+    elif quarter == 5:
+        half = 3
+    else:
+        half = 2
+
+    # convert clock to seconds so the ML model can take it in
+    if half == 1:
+        clockSeconds = clock * 60
+    elif half == 2:
+        clockSeconds = clock * 60 * 2
+    else:
+        clockSeconds = clock * 60 * 3
 
     # take inputs and put into array, ready for ML model
-    feature_list = [down, distance, quarter, clock]
+    feature_list = [half, clockSeconds, down, distance]
     features = [np.array(feature_list)]
 
     # call the play
 
-    # use pickle or H5?????
-    # load H5 from sklearn/pandas pd.read_hdf
-    model = pickle.load(open('???model.pkl'))
+    # load model from saved file
+    model = pickle.load(open('ML_models/random_forest/rfPickle.pkl', 'rb'))
     prediction = model.predict(features)
     output = prediction[0]
 
     # binary output for pass or rush call
-    if output == 0:
+    if output == 1:
         result = 'Pass'
     else:
         result = 'Rush'
 
-    return render_template('index.htnml', call = result)
+    return render_template('index.html', call = f'{result} defense!')
 
 @app.route('/findings')
 def findings():
@@ -60,3 +71,5 @@ def methodology():
 
 if __name__ == "__main__":
     app.run()
+
+import pdb; pdb.set_trace()
