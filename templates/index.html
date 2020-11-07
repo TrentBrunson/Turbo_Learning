@@ -61,7 +61,8 @@
     <div class="container-fluid"> 
         <div class="row">
             <div class="col-md-4">
-                <form class="bg-light" action="/predict" method="POST">
+                <form action="{{url_for('predict')}}" method="post">
+                <!-- <form class="bg-light" action="/predict" method="POST"> -->
                     <p><b>Current Play</b></p>
                     <ul class="list-group">
                         <li class="list-group-item">
