@@ -14,38 +14,40 @@ def index():
 # create prediction module
 @app.route('/predict', methods=['POST'])
 def predict():
-    # get user inputs
-    quarter = request.form['quarter']
-    clock = request.form['clock']
-    down = request.form['down']
-    distance = request.form['distance']
+    # # get user inputs
+    # quarter = request.form['quarter']
+    # clock = request.form['clock']
+    # down = request.form['down']
+    # distance = request.form['distance']
 
-    # change quarters to halves
-    if quarter <= 2:
-        half = 1
-    elif quarter == 5:
-        half = 3
-    else:
-        half = 2
+    # # change quarters to halves
+    # if quarter <= 2:
+    #     half = 1
+    # elif quarter == 5:
+    #     half = 3
+    # else:
+    #     half = 2
 
-    # convert clock to seconds so the ML model can take it in
-    if half == 1:
-        clockSeconds = clock * 60
-    elif half == 2:
-        clockSeconds = clock * 60 * 2
-    else:
-        clockSeconds = clock * 60 * 3
+    # # convert clock to seconds so the ML model can take it in
+    # if half == 1:
+    #     clockSeconds = clock * 60
+    # elif half == 2:
+    #     clockSeconds = clock * 60 * 2
+    # else:
+    #     clockSeconds = clock * 60 * 3
 
-    # take inputs and put into array, ready for ML model
-    feature_list = [half, clockSeconds, down, distance]
-    features = [np.array(feature_list)]
+    # # take inputs and put into array, ready for ML model
+    # feature_list = [half, clockSeconds, down, distance]
+    # features = [np.array(feature_list)]
 
-    # call the play
+    # # call the play
 
-    # load model from saved file
-    model = pickle.load(open('rfPickle.pkl', 'rb'))
-    prediction = model.predict(features)
-    output = prediction[0]
+    # # load model from saved file
+    # model = pickle.load(open('rfPickle.pkl', 'rb'))
+    # prediction = model.predict(features)
+    # output = prediction[0]
+
+    output = 0
 
     # binary output for pass or rush call
     if output == 0:
