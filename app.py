@@ -49,8 +49,7 @@ def predict():
 
     # use pickle or H5?????
     # load H5 from sklearn/pandas pd.read_hdf
-    model = pickle.load(open('???model.pkl'))
-    prediction = model.predict(features)
+    model = pickle.load(open('ML_models/random_forest/rfPickle.pkl', 'rb'))    prediction = model.predict(features)
     output = prediction[0]
 
     # binary output for pass or rush call
