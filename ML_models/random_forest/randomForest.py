@@ -136,7 +136,7 @@ reverse=True)
 # Evaluate the model
 y_pred = rf_model.predict(X_test_scaled)
 print("Confusion Matrix")
-display(cm_df)
+display(features_df)
 print(f"Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.4f}")
 print(classification_report(y_test,y_pred))
 
@@ -149,3 +149,7 @@ test_model = pickle.load(open('rfPickle.pkl', 'rb'))
 result = test_model.score(X_test, y_test)
 print(result)
 
+
+# %%
+
+# %%
