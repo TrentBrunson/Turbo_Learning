@@ -5,6 +5,7 @@ import numpy as np
 from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
+
 # start home page
 @app.route("/")
 def index():
@@ -46,7 +47,8 @@ def predict():
     features = [np.array(feature_list)]
 
     # call the play
-
+ 
+    # load model from saved file
     model = pickle.load(open('rfPickle.pkl', 'rb'))
     prediction = model.predict(features)
     output = prediction[0]
@@ -57,7 +59,7 @@ def predict():
     else:
         result = 'Rush'
 
-    return render_template('index.htnml', call = result)
+    return render_template('index.html', call = f'{result} defense!')
 
 @app.route('/findings')
 def findings():
