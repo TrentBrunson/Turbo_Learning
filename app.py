@@ -49,12 +49,12 @@ def predict():
     # call the play
 
     # load model from saved file
-    model = pickle.load(open('rfPickle.pkl', 'rb'))
+    model = pickle.load(open('ML_models/random_forest/rfPickle.pkl', 'rb'))
     prediction = model.predict(features)
     output = prediction[0]
 
     # binary output for pass or rush call
-    if output == 0:
+    if output == 1:
         result = 'Pass'
     else:
         result = 'Rush'
@@ -70,6 +70,6 @@ def methodology():
     return render_template('methodology.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
 
 import pdb; pdb.set_trace()

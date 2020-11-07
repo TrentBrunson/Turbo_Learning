@@ -2,6 +2,7 @@
 # Import dependencies
 import pandas as pd
 from datetime import datetime
+import os
 
 # ML dependencies
 import sklearn as skl
@@ -13,7 +14,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 import tensorflow as tf
 from scipy import stats
-
+print(os.getcwd())
 #%%
 data_df = pd.read_csv('Texas_combined_formatted.csv')
 #%%
@@ -62,12 +63,19 @@ data_df.loc[data_df['type'].str.contains('Pass'), 'type'] = 'Pass'
 data_df.loc[data_df['type'].str.contains('Rush'), 'type'] = 'Rush'
 data_df
 #%%
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+df2 = data_df.copy()
+df2['type'] = le.fit_transform(df2['type'])
+df2
 # Drop Output label into separate object
-output_df = data_df.type
+output_df = df2.type
 features_df = data_df[['down','distance', 'half', 'seconds_in_half_remaining']].reset_index()
 features_df = features_df.drop("index", axis=1)
 features_df
 # output_df
+# %%
+output_df
 # %%
 # Splitting into Train and Test sets
 X_train, X_test, y_train, y_test = train_test_split(
@@ -89,17 +97,26 @@ X_test_scaled = X_scaler.transform(X_test)
 
 X_train_scaled
 # %%
+# verify that the mean of each column is 0 
+# and its standard deviation is 1
+import numpy as np
+print(np.mean(X_train_scaled[:,0]))
+print(np.mean(X_test_scaled[:,0]))
+print(np.std(X_train_scaled[:,0]))
+print(np.std(X_test_scaled[:,0]))
+# %%
 # Fitting the Decision Tree Model
 
 # Random Forest
 # Create a random forest classifier.
-rf_model = RandomForestClassifier(n_estimators=500, random_state=42) 
+rf_model = RandomForestClassifier(n_estimators=142, random_state=42) 
 
 # Fitting the random forest model
 rf_model = rf_model.fit(X_train_scaled, y_train)
 # %%
 # Making predictions using the random forest testing data.
 predictions = rf_model.predict(X_test_scaled)
+predictions
 # %%
 # Model Evaluation
 # Calculating the confusion matrix
@@ -107,7 +124,7 @@ cm = confusion_matrix(y_test, predictions)
 
 # Create a DataFrame from the confusion matrix.
 cm_df = pd.DataFrame(
-    cm, index=["Actual Good (0)", "Actual Bad (1)"], columns=["Predicted Good (0)", "Predicted Bad(1)"])
+    cm, index=["Actual Pass (0)", "Actual Rush (1)"], columns=["Predicted Pass (0)", "Predicted Rush(1)"])
 
 # add the columns and the rows
 total_column = cm_df.sum(axis = 1)
@@ -148,8 +165,4 @@ pickle.dump(rf_model, open('rfPickle.pkl', 'wb'))
 test_model = pickle.load(open('rfPickle.pkl', 'rb'))
 result = test_model.score(X_test, y_test)
 print(result)
-
-
-# %%
-
 # %%
