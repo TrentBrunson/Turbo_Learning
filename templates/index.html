@@ -14,7 +14,7 @@
     crossorigin="anonymous"
     />
     <!-- linking to stylesheet location, CSS -->
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <link rel="shortcut icon" type="image/ico" href="../images/UTfootballLogo.jpg">
 </head>
@@ -107,6 +107,7 @@
                                 <option value="15-20">15-20</option>
                                 <option value="20+">20+</option>
                             </select> -->
+
                         </li>
                         <li class="list-group-item bg-dark text-center">
                             <button id="filter-btn" type="submit" class="btn btn-dark text-large"><h3><b>Call Play</b></h3></button>
@@ -116,9 +117,10 @@
                 <div>
                     <h4>
                         <p><b>You need to call a: 
-                            <h2>{call}<p class="text-success">{{ call }}</p> <insert argument>
+                            <h2>
+                                <p class="text-success">{{ call }}</p>
                             </h2>
-                            </b></p>
+                        </b></p>
                     </h4>
                 </div>
             </div>
@@ -141,12 +143,6 @@
             </div>
         </div>
     </div>
-    
-    <!-- JavaScript -->
-    <script type="text/javascript" src="static/js/logic.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <!-- <script src="plots.js"></script> -->
 </body>
 
 </html>
