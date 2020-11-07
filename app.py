@@ -4,10 +4,6 @@ import pickle
 import numpy as np
 from flask import Flask, render_template, request, redirect
 
-def time_convert(clock):
-    m,s = map(int,clock.split(':'))
-    return (m*60)+s
-
 app = Flask(__name__)
 
 # start home page
