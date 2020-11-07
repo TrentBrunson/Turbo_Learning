@@ -18,20 +18,14 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
     # get user inputs
-    distance = request.form['distance']
-    down = request.form['down']
     quarter = request.form['quarter']
     clock = request.form['clock']
+    down = request.form['down']
+    distance = request.form['distance']
 
-    # convert clock to something the ML model can take in
-    # how is ML model using time???
-    # bin it - pick midpoint of each bin for value?
-    """***---???---***"""
-    """***---???---***"""
-    """***---???---***"""
 
     # take inputs and put into array, ready for ML model
-    feature_list = [down, distance, quarter, clock]
+    feature_list = [half, clockSeconds, down, distance]
     features = [np.array(feature_list)]
 
     # call the play
