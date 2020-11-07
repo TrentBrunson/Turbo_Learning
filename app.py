@@ -47,13 +47,12 @@ def predict():
 
     # call the play
 
-    # use pickle or H5?????
-    # load H5 from sklearn/pandas pd.read_hdf
-    model = pickle.load(open('ML_models/random_forest/rfPickle.pkl', 'rb'))    prediction = model.predict(features)
+    model = pickle.load(open('rfPickle.pkl', 'rb'))
+    prediction = model.predict(features)
     output = prediction[0]
 
     # binary output for pass or rush call
-    if output == 0:
+    if output == 1:
         result = 'Pass'
     else:
         result = 'Rush'
