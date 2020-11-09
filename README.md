@@ -167,6 +167,13 @@ Code in ‘feature_analysis.py’ and ‘featureMap.py’.
     Reverted back to ‘2nd’ RF model.
 
 
+## Segment 3
+
+### Presentation 
+Please view our ongoing team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
+
+### Database
+For our database, we finalized our Heroku connection with the dashboard. While we're still finalizing our connection with the flask app, it's coming along. Our data and dhashboard needed to migrated to Heroku in order to be able to read the data we sorted and organized in the cloud platform. 
        
        
 
