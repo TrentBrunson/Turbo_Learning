@@ -19,8 +19,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import classification_report
-import tensorflow as tf
 from scipy import stats
+import pickle
 
 #%%
 engine = create_engine(DB_String)
@@ -150,3 +150,9 @@ rf_model = rf_model.fit(X_train_scaled, y_train)
 y_pred = rf_model.predict(X_test_scaled)
 print(f" Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.4f}")
 print(classification_report(y_test,y_pred))
+
+#%%
+#Save the model
+filename = 'finalized_rf_model.sav'
+pickle.dump(rf_model, open(filename, 'wb'))
+# %%
