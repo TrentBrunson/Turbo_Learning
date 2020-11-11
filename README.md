@@ -167,7 +167,25 @@ Code in ‘feature_analysis.py’ and ‘featureMap.py’.
     Reverted back to ‘2nd’ RF model.
 
 
-       
+## Segment 3
+
+### Presentation 
+Please view our ongoing team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
+
+### Database
+For our database, we finalized our Heroku connection with the dashboard. While we're still finalizing our connection with the flask app, it's coming along. Our data and dhashboard needed to migrated to Heroku in order to be able to read the data we sorted and organized in the cloud platform. 
+
+### Dashboard
+This week, the team updated the esthetics and deployed the flask app to continue to make steps in having a fully functional connection with our machine learning module. 
+Once connected, the "Call Play" button reacted by displaying the outcome, which is either "Run" or "Pass". 
+
+See below for an updated image on our interactive feature: 
+       ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/MS3-Dashboard/Presentation%20Images/MS3-Dashboard_interactive.png)
+
+Additionally, we improved the esthetics to be more on theme with UT, and added a probability chart to the right for added information.
+       ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/MS3-Dashboard/Presentation%20Images/MS3-Dashboard_Index.PNG)
+
+### Machine Learning
        
 
 
