@@ -7,7 +7,7 @@ from flask import Flask, render_template, request, redirect
 app = Flask(__name__)
 
 # start home page
-@app.route("/")
+@app.route('/')
 def index():
     return render_template('index.html')
 
@@ -47,7 +47,6 @@ def predict():
     features = [np.array(feature_list)]
 
     # call the play
- 
     # load model from saved file
     model = pickle.load(open('rfPickle.pkl', 'rb'))
     prediction = model.predict(features)
@@ -71,3 +70,5 @@ def methodology():
 
 if __name__ == "__main__":
     app.run()
+
+import pdb; pdb.set_trace()
