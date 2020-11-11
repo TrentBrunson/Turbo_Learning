@@ -185,6 +185,7 @@ See below for an updated image on our interactive feature:
        
 
 Additionally, we improved the esthetics to be more on theme with UT, and added a probability chart to the right for added information.
+
        ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/MS3-Dashboard_Index.PNG)
 
 
