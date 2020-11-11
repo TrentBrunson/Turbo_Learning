@@ -47,9 +47,8 @@ def predict():
     features = [np.array(feature_list)]
 
     # call the play
-
     # load model from saved file
-    model = pickle.load(open('ML_models/random_forest/rfPickle.pkl', 'rb'))
+    model = pickle.load(open('rfPickle.pkl', 'rb'))
     prediction = model.predict(features)
     output = prediction[0]
 
