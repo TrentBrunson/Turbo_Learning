@@ -19,8 +19,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import classification_report
-import tensorflow as tf
 from scipy import stats
+import pickle
 
 #%%
 engine = create_engine(DB_String)
@@ -93,7 +93,7 @@ data_df.loc[data_df['type'].str.contains('Rushing'), 'type'] = 'Rush'
 #%%
 # Drop Output label into separate object
 output_df = data_df.type
-features_df = data_df[['offenseabbr','texscore','oppscore','quarter','down','distance','yardline','half', 'time_remaining_binned']].reset_index()
+features_df = data_df[['quarter','down','distance', 'time_remaining_binned']].reset_index()
 features_df = features_df.drop(columns = ['playID'])
 #%%
 # Check categorical columns of feature df and check the number of unique values in each column
@@ -108,19 +108,23 @@ features_df[data_cat].nunique()
 enc = OneHotEncoder(sparse=False)
 
 # Fit and transform the OneHotEncoder using the categorical variable list
-encode_df = pd.DataFrame(enc.fit_transform(features_df[data_cat]))
+#encode_df = pd.DataFrame(enc.fit_transform(features_df[data_cat]))
+
+# Fit and transform with cat code
+encode_df = features_df.copy()
+encode_df['time_remaining_binned'] = encode_df['time_remaining_binned'].cat.codes
 
 # Add the encoded variable names to the DataFrame
-encode_df.columns = enc.get_feature_names(data_cat)
+#encode_df.columns = enc.get_feature_names(data_cat)
 
 #%%
 # Merge encoded DataFrame back into the original feature df and drop original object/category columns
-encoded_features_df = features_df.merge(encode_df,left_index=True, right_index=True)
-encoded_features_df = encoded_features_df.drop(data_cat,1)
+#encoded_features_df = features_df.merge(encode_df,left_index=True, right_index=True)
+#encoded_features_df = encoded_features_df.drop(data_cat,1)
 
 #%%
 #Split into testing and training groups
-X = encoded_features_df
+X = encode_df
 y = output_df
 #%%
 # Split training/test datasets
@@ -150,3 +154,8 @@ rf_model = rf_model.fit(X_train_scaled, y_train)
 y_pred = rf_model.predict(X_test_scaled)
 print(f" Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.4f}")
 print(classification_report(y_test,y_pred))
+
+#%%
+#Save the model
+filename = 'finalized_rf_model.sav'
+pickle.dump(rf_model, open(filename, 'wb'))
