@@ -108,19 +108,23 @@ features_df[data_cat].nunique()
 enc = OneHotEncoder(sparse=False)
 
 # Fit and transform the OneHotEncoder using the categorical variable list
-encode_df = pd.DataFrame(enc.fit_transform(features_df[data_cat]))
+#encode_df = pd.DataFrame(enc.fit_transform(features_df[data_cat]))
+
+# Fit and transform with cat code
+encode_df = features_df.copy()
+encode_df['time_remaining_binned'] = encode_df['time_remaining_binned'].cat.codes
 
 # Add the encoded variable names to the DataFrame
-encode_df.columns = enc.get_feature_names(data_cat)
+#encode_df.columns = enc.get_feature_names(data_cat)
 
 #%%
 # Merge encoded DataFrame back into the original feature df and drop original object/category columns
-encoded_features_df = features_df.merge(encode_df,left_index=True, right_index=True)
-encoded_features_df = encoded_features_df.drop(data_cat,1)
+#encoded_features_df = features_df.merge(encode_df,left_index=True, right_index=True)
+#encoded_features_df = encoded_features_df.drop(data_cat,1)
 
 #%%
 #Split into testing and training groups
-X = encoded_features_df
+X = encode_df
 y = output_df
 #%%
 # Split training/test datasets
@@ -155,4 +159,3 @@ print(classification_report(y_test,y_pred))
 #Save the model
 filename = 'finalized_rf_model.sav'
 pickle.dump(rf_model, open(filename, 'wb'))
-# %%
