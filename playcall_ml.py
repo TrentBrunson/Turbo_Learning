@@ -93,7 +93,7 @@ data_df.loc[data_df['type'].str.contains('Rushing'), 'type'] = 'Rush'
 #%%
 # Drop Output label into separate object
 output_df = data_df.type
-features_df = data_df[['offenseabbr','texscore','oppscore','quarter','down','distance','yardline','half', 'time_remaining_binned']].reset_index()
+features_df = data_df[['quarter','down','distance', 'time_remaining_binned']].reset_index()
 features_df = features_df.drop(columns = ['playID'])
 #%%
 # Check categorical columns of feature df and check the number of unique values in each column
