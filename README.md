@@ -180,13 +180,13 @@ This week, the team updated the esthetics and deployed the flask app to continue
 Once connected, the "Call Play" button reacted by displaying the outcome, which is either "Run" or "Pass". 
 
 See below for an updated image on our interactive feature: 
-       ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/MS3-Dashboard/Presentation%20Images/MS3-Dashboard_interactive.png)
+       ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/MS3-Dashboard_interactive.png)
 
 Additionally, we improved the esthetics to be more on theme with UT, and added a probability chart to the right for added information.
-       ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/MS3-Dashboard/Presentation%20Images/MS3-Dashboard_Index.PNG)
+       ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/MS3-Dashboard_Index.PNG)
 
 ### Machine Learning
-       
+We continued to work for a better accuracy score and finalize elements for a successful connection to the dashboard.        
 
 
 
