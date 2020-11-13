@@ -68,5 +68,9 @@ def findings():
 def methodology():
     return render_template('methodology.html')
 
+@app.route('/kmeans')
+def kmeans():
+    return render_template('kmeans.html')
+
 if __name__ == "__main__":
     app.run()
