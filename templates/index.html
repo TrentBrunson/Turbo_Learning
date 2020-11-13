@@ -64,7 +64,6 @@
         <div class="row">
             <div class="col-md-4">
                 <form action="/predict" method="POST">
-                <!-- <form class="bg-light" action="/predict" method="POST"> -->
                     <p><b>Current Play</b></p>
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -118,9 +117,14 @@
                 </div>
             </div>
             <br><br>  
-            <div class="col-md-8" style="text-align: center">
-                <p><b>Take a look at the chart below to learn how different <br> variables positively or negatively affect the probability of plays.</b></p>
+            <div class="col-md-8" style="text-align: left">
+                <p><b>Take a look at the chart below to learn how different variables positively or negatively affect the probability of plays.  
+                    As a football fan may expect, down and distance have significant impacts while others, not so much.<br> 
+
                 <img src="../static/images/TriangleHeatMap.png" class="img-fluid" alt="Responsive image"/>
+                <br>Look at the 
+                <a href="/findings">findings</a>
+                page to see how these correlate to the prediction.</b></p>
             </div><br>
     </div>
 </body>
