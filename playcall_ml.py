@@ -2,6 +2,7 @@
 # Import dependencies
 import pandas as pd
 from datetime import datetime
+import numpy as np
 
 # Python SQL toolkit and Object Relational Mapper
 import sqlalchemy
@@ -19,8 +20,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import classification_report
-from scipy import stats
 import pickle
+from joblib import dump, load
 
 #%%
 engine = create_engine(DB_String)
@@ -47,7 +48,7 @@ data_df.index.name = "playID"
 
 #%%
 data_df['clock'] = data_df['clock'].astype(str)
-data_df.dtypes
+
 #%%
 # Creating a 'time remaining in quarter' column 
 # This allows us to bin easily but also treat "time" as a continuous feature more easily should we choose
@@ -65,7 +66,9 @@ data_df['seconds_in_half_remaining'] = data_df['seconds_in_quarter_remaining']
 data_df.loc[data_df.quarter== 1,'seconds_in_half_remaining':]*=2
 data_df.loc[data_df.quarter== 3,'seconds_in_half_remaining':]*=2
 
-
+#%%
+# Create score differential column
+data_df['tex_lead'] = data_df['texscore'] - data_df['oppscore']
 #%%
 # Create 'half' feature using the 'quarter' column
 # This allows easier calculation for "time left in half" but also provides us with another feature
@@ -93,7 +96,7 @@ data_df.loc[data_df['type'].str.contains('Rushing'), 'type'] = 'Rush'
 #%%
 # Drop Output label into separate object
 output_df = data_df.type
-features_df = data_df[['quarter','down','distance', 'time_remaining_binned']].reset_index()
+features_df = data_df[['half','down','distance', 'time_remaining_binned']].reset_index()
 features_df = features_df.drop(columns = ['playID'])
 #%%
 # Check categorical columns of feature df and check the number of unique values in each column
@@ -105,17 +108,17 @@ features_df[data_cat].nunique()
 # Encode categorical data
 
 # Create a OneHotEncoder instance
-enc = OneHotEncoder(sparse=False)
+#enc = OneHotEncoder(sparse=False)
 
 # Fit and transform the OneHotEncoder using the categorical variable list
 #encode_df = pd.DataFrame(enc.fit_transform(features_df[data_cat]))
 
+# Add the encoded variable names to the DataFrame
+#encode_df.columns = enc.get_feature_names(data_cat)
+
 # Fit and transform with cat code
 encode_df = features_df.copy()
 encode_df['time_remaining_binned'] = encode_df['time_remaining_binned'].cat.codes
-
-# Add the encoded variable names to the DataFrame
-#encode_df.columns = enc.get_feature_names(data_cat)
 
 #%%
 # Merge encoded DataFrame back into the original feature df and drop original object/category columns
@@ -123,7 +126,7 @@ encode_df['time_remaining_binned'] = encode_df['time_remaining_binned'].cat.code
 #encoded_features_df = encoded_features_df.drop(data_cat,1)
 
 #%%
-#Split into testing and training groups
+#Split into feature and output
 X = encode_df
 y = output_df
 #%%
@@ -137,13 +140,14 @@ scaler = StandardScaler()
 
 # Fit the StandardScaler
 X_scaler = scaler.fit(X_train)
+dump(X_scaler, 'rf_std_scaler.bin', compress=True)
 
 # Scale the data
 X_train_scaled = X_scaler.transform(X_train)
 X_test_scaled = X_scaler.transform(X_test)
 
 #%%
-# 1st Random Forest Model
+# Random Forest Model
 # Create a random forest classifier.
 rf_model = RandomForestClassifier(n_estimators=128, random_state=42)
 
@@ -154,6 +158,13 @@ rf_model = rf_model.fit(X_train_scaled, y_train)
 y_pred = rf_model.predict(X_test_scaled)
 print(f" Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.4f}")
 print(classification_report(y_test,y_pred))
+
+#%%
+feature_list = [1,2,1,10]
+new_data = np.array([feature_list])
+scaled_input = X_scaler.transform(new_data)
+#%%
+rf_model.predict(scaled_input)
 
 #%%
 #Save the model
