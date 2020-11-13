@@ -45,13 +45,13 @@ Selected topic
 * Description of the analysis phase of the project
 
 ### Database
-For our database, we used **Heroku** to store our data. Our decision to use this cloud platform was due to the dynamic features and its free of cost offerings. 
+For our database, we used **Heroku Postgres - SQL Services** to host our data base. Our decision to use this cloud platform was due to the dynamic features and its free of cost offerings. 
 
 Detailed below is our ERD:
 
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/DB/QuickDBD-CFB_DB.png)
 
-During our data exploration, we identified a primary key, joined tables to more accurately represent the data, dropped duplicates and narrowed the number of years and attributes to test, based of what we found to be of highest importance. 
+We utilized pgAdmin4 to create our data tables and alter them to fit our machine learning goals. Primary keys were created with given game, play, and drive identifiers. Our queries also transformed out data to show Texas Score and Opponent Score instead of Home Score and Away Score. We also joined the table with score data with our play data table. Due to the row limitations on Heroku, we did have to limit the amount of years included in our data. We determined the most recent years would give a better representation of what we were trying to accomplish. 
 
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Database-1.PNG)
 
@@ -173,7 +173,7 @@ Code in ‘feature_analysis.py’ and ‘featureMap.py’.
 Please view our ongoing team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
 
 ### Database
-For our database, we finalized our Heroku connection with the dashboard. While we're still finalizing our connection with the flask app, it's coming along. Our data and dhashboard needed to migrated to Heroku in order to be able to read the data we sorted and organized in the cloud platform. 
+For our database, we finalized our connection to the machine learning model by utilizing SQL Alchemy. Our main focus now is to get our app running as a Heroku application. This required us to troubleshoot Heroku application deployment. We were able to get our application to deploy successfully by using a Pipenv. The next step will be to make sure our dashboard interactive features are working as expected with our model and database.
 
 ### Dashboard
 
