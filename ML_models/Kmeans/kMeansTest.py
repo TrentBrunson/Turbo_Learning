@@ -3,21 +3,16 @@
 import pandas as pd
 from datetime import datetime
 import os
+import hvplot.pandas
+import plotly.express as px
 
 # ML dependencies
-import sklearn as skl
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
-import tensorflow as tf
-from scipy import stats
-print(os.getcwd())
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import LabelEncoder
 #%%
 data_df = pd.read_csv('Texas_combined_formatted.csv')
-#%%
+data_df
+# %%
 data_df['clock'] = data_df['clock'].astype(str)
 data_df.dtypes
 #%%
@@ -28,7 +23,11 @@ def time_convert(x):
     return (h*360)+(m*60)+s
 
 data_df['seconds_in_quarter_remaining'] = data_df.clock.apply(time_convert)
-
+#%%
+# Convert all pass outcomes to "pass" to create a true binary outcome
+data_df.loc[data_df['type'].str.contains('Pass'), 'type'] = 'Pass'
+data_df.loc[data_df['type'].str.contains('Rush'), 'type'] = 'Rush'
+data_df
 #%%
 # Utilizing 'time remaining in quarter' column to generate 'time remaining in half' a criteria 
 # which should be a better indicator of run vs pass as strategies change not at the end of the
@@ -53,71 +52,81 @@ data_df
 # # Bucketing 'time remaining in half'
 # # In deciding bin size: the two-minute mark is likely where strategies are going to change, 
 # # so a bin size larger than that would likely obscure the potential effect of the feature.
-# time_remaining_bins = [-1, 120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320, 1440, 1560, 1680, 1800]
-# labels = ['0-2 min', '2-4 min', '4-6 min', '6-8 min', '8-10 min', '10-12 min', '12-14 min', '14-16 min', '16-18 min', '18-20 min', '20-22 min', '22-24 min', '24-26 min', '26-28 min', '28-30 min']
-# data_df['time_remaining_binned'] = pd.cut(data_df['seconds_in_half_remaining'], bins=time_remaining_bins, labels=labels)
+time_remaining_bins = [-1, 120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320, 1440, 1560, 1680, 1800]
+labels = ['0-2 min', '2-4 min', '4-6 min', '6-8 min', '8-10 min', '10-12 min', '12-14 min', '14-16 min', '16-18 min', '18-20 min', '20-22 min', '22-24 min', '24-26 min', '26-28 min', '28-30 min']
+data_df['time_remaining_binned'] = pd.cut(data_df['seconds_in_half_remaining'], bins=time_remaining_bins, labels=labels)
 
-#%%
-# Convert all pass outcomes to "pass" to create a true binary outcome
-data_df.loc[data_df['type'].str.contains('Pass'), 'type'] = 'Pass'
-data_df.loc[data_df['type'].str.contains('Rush'), 'type'] = 'Rush'
-data_df
-#%%
-from sklearn.preprocessing import LabelEncoder
+# %%
 le = LabelEncoder()
-df2 = data_df.copy()
-df2['type'] = le.fit_transform(df2['type'])
-df2
-# Drop Output label into separate object
-output_df = df2.type
-features_df = data_df[['down','distance', 'half', 'seconds_in_half_remaining']].reset_index()
-features_df = features_df.drop("index", axis=1)
-features_df
-# output_df
-# %%
-output_df
-# %%
-# Splitting into Train and Test sets
-X_train, X_test, y_train, y_test = train_test_split(
-    features_df, output_df, random_state=78, train_size= 0.5)
+kmodel_df = data_df.copy()
+kmodel_df['type'] = le.fit_transform(kmodel_df['type'])
+kmodel_df
+# 1 = rush; 0 = pass
+#%%
+kmodel_df = kmodel_df.drop([
+    'playID', 'gameId', 'year', 'week', 'offenseAbbr', 
+    'defenseAbbr', 'seconds_in_half_remaining', 
+    'time_remaining_binned', 'clock'
+    ], axis=1)
+kmodel_df
 
 # %%
-# scaling the data so if want to compare this decision tree
-# model to other best fit models, can do so quicky
-
-# Creating a StandardScaler instance.
-scaler = StandardScaler()
-
-# Fitting the Standard Scaler with the training data.
-X_scaler = scaler.fit(X_train)
-
-# Scaling the data.
-X_train_scaled = X_scaler.transform(X_train)
-X_test_scaled = X_scaler.transform(X_test)
-
-X_train_scaled
+kmodel_df.hvplot.scatter(x="yardLine", y="seconds_in_quarter_remaining", by="type")
 # %%
-# verify that the mean of each column is 0 
-# and its standard deviation is 1
-import numpy as np
-print(np.mean(X_train_scaled[:,0]))
-print(np.mean(X_test_scaled[:,0]))
-print(np.std(X_train_scaled[:,0]))
-print(np.std(X_test_scaled[:,0]))
+# Plotting the clusters with three features
+fig = px.scatter_3d(
+    kmodel_df, 
+    x="yardLine", 
+    y="down", 
+    z="distance", 
+    color="type", 
+    symbol="type", 
+    # size="yardsGained",
+    width=800
+    )
+fig.update_layout(legend=dict(x=0,y=1), title = "1 = Rush 0 = Pass") 
+fig.show()
 # %%
-# Fitting the Decision Tree Model
+fig.write_html("kmeans.html")
+# %%
+fig.write_image(file='../static/images/kmeans.png', format='png', engine = 'kaleido')
+#%%
 
-# Random Forest
-# Create a random forest classifier.
-rf_model = RandomForestClassifier(n_estimators=142, random_state=42) 
+# %%
+# Function to cluster and plot dataset
+def test_cluster_amount(df, clusters):
+    model = KMeans(n_clusters=clusters, random_state=5)   
+    model
+    # Fitting model
+    model.fit(df)
+    # Add a new class column
+    df["class"] = model.labels_
+    predictions = model.predict(kmodel_df)
+    print(predictions)
+#%%
+inertia = []
+k = list(range(1, 11))
 
-# Fitting the random forest model
-rf_model = rf_model.fit(X_train_scaled, y_train)
-# %%
-# Making predictions using the random forest testing data.
-predictions = rf_model.predict(X_test_scaled)
-predictions
-# %%
+# Looking for the best K
+for i in k:
+    km = KMeans(n_clusters=i, random_state=0)
+    km.fit(kmodel_df)
+    inertia.append(km.inertia_)
+
+# Define a DataFrame to plot the Elbow Curve using hvPlot
+elbow_data = {"k": k, "inertia": inertia}
+df_elbow = pd.DataFrame(elbow_data)
+df_elbow.hvplot.line(x="k", y="inertia", title="Elbow Curve", xticks=k)
+
+#%%
+
+
+
+
+
+
+
+
 # Model Evaluation
 # Calculating the confusion matrix
 cm = confusion_matrix(y_test, predictions)
