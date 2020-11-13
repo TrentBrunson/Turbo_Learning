@@ -66,7 +66,7 @@
                 <img src="../static/images/PlayTypeHeatMap.png" class="img-fluid" alt="Responsive image"/>
             </div>
             <div class="col-md-4" style="text-align: left"><br><br><br>
-                <ul> <b>Selected features</b> for user input included <br>
+                <ul> <b>Selected features</b> for user input included: <br><br>
                     <li>Half</li>
                     <li>Time Remaining</li>
                     <li>Down</li>
@@ -74,46 +74,59 @@
                 </ul>
             </div><br>
         </div>
-
-
         <div class="row"><h4>Random Forest Classifier</h4></div><br>
         <div class="row">
+            <div>
+                <p>We initially selected a supervised learning model to begin the machine learning algorithms.  
+                    And the <b>Random Forest Classifier</b> being our first choice also turned out to be
+                    the most reliable. <br><br>
+                    A concern of any machine learning model is overfitting.  Borrowing from 
+                    <!-- <a style="color:honeydew;" href="/findings"><b>Findings</b></a> -->
+                    <a href="https://machinelearningmastery.com/overfitting-machine-learning-models/">Jason Brownlee</a>,
+                    we used that visualization style to identify how deep the forest can be run before the machine learning
+                    model becomes too specific to the given data set.
+                </p>
+            </div>
             <img src="../static/images/treeOverfit.png" class="img-fluid" alt="Responsive image"/>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-                culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div>
+                <h6>Overfit plot.  A max depth of anymore than 7 will result in overfitting.</h6><br>
+            </div>
         </div>
         <div class="row"><h4>Multiple Linear Regression</h4></div><br>
         <div class="row">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-                culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
+            <p>Travis insert his text here and an image.</p>
+            <img src="../static/images/placeholder.png" class="img-fluid" alt="Responsive image"/>
+        </div><br>
         <div class="row"><h4>K-Means</h4></div><br>
         <div class="row">
             <div  style="text-align: left">
-                <img src="../static/images/kmeans.html" class="img-fluid" alt="Responsive image"/>
             </div>
-            <div class="col-md-8" style="text-align: left"></div>
-                <p>K-Means is an unsupervised learning model that attempts to group blah .<br> 
-                <img src="../static/images/TriangleHeatMap.png" class="img-fluid" alt="Responsive image"/>
-                <br>Look at the 
-                <a href="/kmeans">interactive graph.</a>
-                page to see how these correlate to the prediction.</p>
-        </div>
+            <div style="text-align: left">
+                <p>K-Means is an unsupervised learning model that attempts to identify clustering issues.   
+                    In order find the optimum number of clusters for the K-Means model, plot
+                    the clusters on the x-axis and on the y-axis, plot the amount of variation 
+                    in the data set, also called inertia.  This analysis indicates that three clusters are
+                    sufficient to optimize this machine learning model.<br> 
+                    <img src="../static/images/kmeans_elbow_plot.png" class="img-fluid" alt="Responsive image"/>
+                    <br>FYI, in the graph below, Rush is 1; pass is 0.<br>
+                    <img src="../static/images/kmeans_2D_plot.png" class="img-fluid" alt="Responsive image"/>
+                    <br><h6>2-D scatter plot showing pass and rush play calls.</h6>
+                    <div>
+                        <br>Given the plot above, it will be very difficult for this unsupervised learning model 
+                        to make accurate predictions.
+                        <br>Look at the 
+                        <a href="/kmeans" style="color:blue;">interactive graph</a>
+                        page to see how these correlate to the predicted play.
+                    </div>
+                </p>
+            </div>
+        </div><br>
         <div class="row "><h4>Selected model</h4></div><br>
         <div class="row">
-            <p>Limitations of the model selected.  
-            Strengths of model chosen</p>
+            <p>Ultimately, we stuck with our initial choice of machine learning models, the <b>Random Forest Classifier</b>.
+                <br> Limitations of the model selected. 
+                <br> Strengths of model chosen
+            </p>
         </div>
         <div class="row "><h4>Recommendations for future development</h4></div><br>
         <div class="row">

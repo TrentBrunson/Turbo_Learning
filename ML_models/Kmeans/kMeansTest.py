@@ -89,10 +89,6 @@ fig.show()
 # %%
 fig.write_html("kmeans.html")
 # %%
-fig.write_image(file='../static/images/kmeans.png', format='png', engine = 'kaleido')
-#%%
-
-# %%
 # Function to cluster and plot dataset
 def test_cluster_amount(df, clusters):
     model = KMeans(n_clusters=clusters, random_state=5)   
@@ -117,61 +113,3 @@ for i in k:
 elbow_data = {"k": k, "inertia": inertia}
 df_elbow = pd.DataFrame(elbow_data)
 df_elbow.hvplot.line(x="k", y="inertia", title="Elbow Curve", xticks=k)
-
-#%%
-
-
-
-
-
-
-
-
-# Model Evaluation
-# Calculating the confusion matrix
-cm = confusion_matrix(y_test, predictions)
-
-# Create a DataFrame from the confusion matrix.
-cm_df = pd.DataFrame(
-    cm, index=["Actual Pass (0)", "Actual Rush (1)"], columns=["Predicted Pass (0)", "Predicted Rush(1)"])
-
-# add the columns and the rows
-total_column = cm_df.sum(axis = 1)
-total_row = cm_df.sum(axis = 0)
-
-total_column
-total_row
-
-# add the new totals to the DF
-cm_df['Column Totals'] = total_column
-cm_df.loc['Row Totals'] = cm_df.sum()
-
-# cm_df = cm_df.drop(columns='Column Totals')
-cm_df
-# %%
-# Calculating the accuracy score
-acc_score = accuracy_score(y_test, predictions)
-acc_score
-# %%
-# rank order the features in the random forest
-importances = rf_model.feature_importances_
-# sort the features by their importance.
-sorted(zip(rf_model.feature_importances_, features_df.columns), 
-reverse=True)
-# %%
-# Evaluate the model
-y_pred = rf_model.predict(X_test_scaled)
-print("Confusion Matrix")
-display(features_df)
-print(f"Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.4f}")
-print(classification_report(y_test,y_pred))
-
-# %%
-import pickle
-pickle.dump(rf_model, open('rfPickle.pkl', 'wb'))
-
-# %%
-test_model = pickle.load(open('rfPickle.pkl', 'rb'))
-result = test_model.score(X_test, y_test)
-print(result)
-# %%

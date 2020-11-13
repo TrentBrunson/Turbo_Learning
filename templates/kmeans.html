@@ -1,6 +1,43 @@
 <html>
-<head><meta charset="utf-8" /></head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>University of Texas Play Caller</title>
+    <!-- accessing Bootstrap content delivery network (CDN) -->
+    <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+    />
+    <!-- linking to stylesheet location, CSS -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="images/UTfootballLogo.jpg">
+</head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">University of Texas Football - Defensive Play Caller</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/findings">Findings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/methodology">Methodology</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
         <script type="text/javascript">/**
 * plotly.js v1.56.0
