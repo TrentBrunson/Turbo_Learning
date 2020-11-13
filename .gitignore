@@ -2,6 +2,7 @@
 .DS*
 /dataRaw
 config.js
+/images
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
