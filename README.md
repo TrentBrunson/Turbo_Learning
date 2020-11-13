@@ -45,13 +45,13 @@ Selected topic
 * Description of the analysis phase of the project
 
 ### Database
-For our database, we used **Heroku Postgres - SQL Services** to host our data base. Our decision to use this cloud platform was due to the dynamic features and its free of cost offerings. 
+For our database, we used **Heroku Postgres - SQL Services** to host our data base. Our decision to use this cloud platform was due to the dynamic features and its free of cost offerings. Our plan of action for our database was created with the utilization of an entity relationship diagram.
 
 Detailed below is our ERD:
 
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/DB/QuickDBD-CFB_DB.png)
 
-We utilized pgAdmin4 to create our data tables and alter them to fit our machine learning goals. Primary keys were created with given game, play, and drive identifiers. Our queries also transformed out data to show Texas Score and Opponent Score instead of Home Score and Away Score. We also joined the table with score data with our play data table. Due to the row limitations on Heroku, we did have to limit the amount of years included in our data. We determined the most recent years would give a better representation of what we were trying to accomplish. 
+ We utilized gAdmin4 to create our data tables and alter them to fit our machine learning goals. Primary keys were created with given game, play, and drive identifiers. Our queries also transformed out data to show Texas Score and Opponent Score instead of Home Score and Away Score. We also joined the table with score data with our play data table. Due to the row limitations on Heroku, we did have to limit the amount of years included in our data. We determined the most recent years would give a better representation of what we were trying to accomplish. All data base queries and schemas can be found in the folder titled "DB".
 
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Database-1.PNG)
 
