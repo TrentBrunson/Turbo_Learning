@@ -55,9 +55,9 @@ def predict():
     
     # taking into account half
 
-    if half == 1:
+    if quarter == 1:
         time_remaining_binned = time_in_quarter
-    elif half == 3:
+    elif quarter == 3:
         time_remaining_binned = time_in_quarter
     else:
         time_remaining_binned = time_in_quarter + 7
