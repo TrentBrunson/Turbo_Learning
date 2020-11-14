@@ -227,7 +227,7 @@ After working to increase predictability, we connected the ML model to the final
  ![alt text](https://github.com/TrentBrunson/Turbo_Learning/blob/main/static/images/feature_importance.png)
  
  
- The module is now a fully working machine learning module with scaled data! Try it here: **[Call a Play!](https://ut-football-play-caller.herokuapp.com/)
+ The module is now a fully working machine learning module with scaled data! Try it **[here!](https://ut-football-play-caller.herokuapp.com/)**
  
  
 ### Recommendations for Future Analysis 
