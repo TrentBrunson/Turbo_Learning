@@ -109,7 +109,7 @@ print(np.std(X_test_scaled[:,0]))
 
 # Random Forest
 # Create a random forest classifier.
-rf_model = RandomForestClassifier(n_estimators=142, random_state=42) 
+rf_model = RandomForestClassifier(n_estimators=142, random_state=42, max_depth=7) 
 
 # Fitting the random forest model
 rf_model = rf_model.fit(X_train_scaled, y_train)
@@ -149,6 +149,11 @@ importances = rf_model.feature_importances_
 # sort the features by their importance.
 sorted(zip(rf_model.feature_importances_, features_df.columns), 
 reverse=True)
+
+feature_importances = pd.DataFrame(
+    rf_model.feature_importances_,index = X_train.columns,columns=['Importance']
+    ).sort_values('Importance',ascending=False)
+feature_importances
 # %%
 # Evaluate the model
 y_pred = rf_model.predict(X_test_scaled)
@@ -156,7 +161,7 @@ print("Confusion Matrix")
 display(features_df)
 print(f"Random forest predictive accuracy: {accuracy_score(y_test,y_pred):.4f}")
 print(classification_report(y_test,y_pred))
-
+print(f"Feature importance:\n\n {feature_importances}")
 # %%
 import pickle
 pickle.dump(rf_model, open('rfPickle.pkl', 'wb'))

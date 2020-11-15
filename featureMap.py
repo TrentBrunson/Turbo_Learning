@@ -38,17 +38,21 @@ df.loc[df.quarter == 4, 'half'] = 2
 # Quick workaround to account for OT
 df.loc[df.quarter == 5, 'half'] = 3
 df.loc[df.quarter == 6, 'half'] = 3
+
+# convert play type to all rush or pass
+# Convert all pass outcomes to "pass" to create a true binary outcome
+df.loc[df['type'].str.contains('Pass'), 'type'] = 'Pass'
+df.loc[df['type'].str.contains('Rushing'), 'type'] = 'Rush'
+
+# save seconds conversion for charting
+chart_df = df[['texscore','oppscore','quarter','down','distance','yardline','half', 'seconds_in_half_remaining']]
+
 # Bucketing 'time remaining in half'
 # In deciding bin size: the two-minute mark is likely where strategies are going to change, 
 # so a bin size larger than that would likely obscure the potential effect of the feature.
 time_remaining_bins = [-1, 120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320, 1440, 1560, 1680, 1800]
 labels = ['0-2 min', '2-4 min', '4-6 min', '6-8 min', '8-10 min', '10-12 min', '12-14 min', '14-16 min', '16-18 min', '18-20 min', '20-22 min', '22-24 min', '24-26 min', '26-28 min', '28-30 min']
 df['time_remaining_binned'] = pd.cut(df['seconds_in_half_remaining'], bins=time_remaining_bins, labels=labels)
-
-# convert play type to all rush or pass
-# Convert all pass outcomes to "pass" to create a true binary outcome
-df.loc[df['type'].str.contains('Pass'), 'type'] = 'Pass'
-df.loc[df['type'].str.contains('Rushing'), 'type'] = 'Rush'
 
 # drop temporary columns
 df.drop(['seconds_in_quarter_remaining','seconds_in_half_remaining', 'clock'], axis=1, inplace=True)
@@ -67,10 +71,13 @@ encoded_y = labels.transform(y)
 
 # add column for encoded y values
 en_y = encoded_y
-df["code"]=en_y
+df["Pass/Rush"]=en_y
 
-output_df = df.type
+output_df = df['Pass/Rush']
 features_df = df[['texscore','oppscore','quarter','down','distance','yardline','half', 'time_remaining_binned']]
+# %%
+features_df
+# output_df
 # %%
 fig, ax = plt.subplots(figsize= (10,6))
 corrImage = sns.heatmap(df.corr(), vmin=-1, vmax=1, cmap= 'BrBG', annot=True)
@@ -87,9 +94,53 @@ triangleHeatMap = sns.heatmap(df.corr(), mask=mask, vmin=-0.5, vmax=1, annot=Tru
 fig = triangleHeatMap.get_figure()
 fig.savefig('images/TriangleHeatMap.png')
 # %%
-df.corr()[['code']].sort_values(by='code', ascending=False)
+df.corr()[['Pass/Rush']].sort_values(by='Pass/Rush', ascending=False)
 plt.figure(figsize=(8, 12))
-yheatmap = sns.heatmap(df.corr()[['code']].sort_values(by='code', ascending=False), vmin=-0.5, vmax=1, annot=True, cmap='BrBG')
+yheatmap = sns.heatmap(df.corr()[['Pass/Rush']].sort_values(by='Pass/Rush', ascending=False), vmin=-0.5, vmax=1, annot=True, cmap='BrBG')
 fig = yheatmap.get_figure()
-fig.savefig('images/PlayTypeHeatMap.png')
+fig.savefig('static/images/PlayTypeHeatMap.png')
+# %%
+# evaluate tree performance on train and test sets with different tree depths
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from matplotlib import pyplot
+# from sklearn.tree import DecisionTreeClassifier
+# %%
+chart_df
+
+#%%
+# overfit evaluation loop below is sourced from Jason Brownlee 11-11-20
+#Split into testing and training groups
+X = chart_df
+y = output_df
+# split into train test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+# define lists to collect scores
+train_scores, test_scores = list(), list()
+# define the tree depths to evaluate
+values = [i for i in range(1, 21)]
+# evaluate a decision tree for each depth
+for i in values:
+	# configure the model
+	model = RandomForestClassifier(max_depth=i)
+	# fit model on the training dataset
+	model.fit(X_train, y_train)
+	# evaluate on the train dataset
+	train_yhat = model.predict(X_train)
+	train_acc = accuracy_score(y_train, train_yhat)
+	train_scores.append(train_acc)
+	# evaluate on the test dataset
+	test_yhat = model.predict(X_test)
+	test_acc = accuracy_score(y_test, test_yhat)
+	test_scores.append(test_acc)
+	# summarize progress
+	print('>%d, train: %.3f, test: %.3f' % (i, train_acc, test_acc))
+# plot of train and test scores vs tree depth
+fig, ax = plt.subplots(figsize= (10,6))
+a = pyplot.plot(values, train_scores, '-o', label='Train')
+pyplot.plot(values, test_scores, '-o', label='Test')
+pyplot.legend()
+fig.savefig('static/images/treeOverfit.png')
+pyplot.show()
+
 # %%

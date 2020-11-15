@@ -48,13 +48,12 @@
                 <p class="lead text-left">
                    <b> Calling the right play is key to winning, and the defense play caller below is here to give you the victory!</b> 
                    <br><br>
-                    In football, good defense keeps the other team from scoring and provides a good field position, which allows the offense to start their drive-to-goal in a better position, 
-                    thus allowing an easier time scoring. Simple, offense may win
-                    games, but DEFENSE wins championships! Hook 'Em! <br><br>If you want to know more about our logic and machine learning process, 
-                    check out our 
-                    <a style="color:honeydew;" href="/methodology"><b>Methodology</b></a>
+                    In football, offense makes most headlines; defense sets this up through dominating opposing offense and delivering good field position, 
+                    thus allowing an easier time scoring.  Simply, offense may win games, but DEFENSE wins championships! Hook 'Em! <br>
+                    <br>If you want to know more about our logic and machine learning process, check out our 
+                    <a style="color:burlywood;" href="/methodology"><b>Methodology</b></a>
                      and read our 
-                    <a style="color:honeydew;" href="/findings"><b>Findings</b></a>
+                    <a style="color:burlywood;" href="/findings"><b>Findings</b></a>
                     sections. 
                 </p>
             </div>
@@ -64,7 +63,6 @@
         <div class="row">
             <div class="col-md-4">
                 <form action="/predict" method="POST">
-                <!-- <form class="bg-light" action="/predict" method="POST"> -->
                     <p><b>Current Play</b></p>
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -81,14 +79,14 @@
                             <div>
                                 <label for="clock">Enter Time Remaining in Quarter</label>
                                 <select name="clock" id="clock_select">
-                                    <option value="15">14-15</option>
-                                    <option value="13">12-14</option>
-                                    <option value="11">10-12</option>
-                                    <option value="9">8-10</option>
-                                    <option value="7">6-8</option>
-                                    <option value="5">4-6</option>
-                                    <option value="3">2-4</option>
-                                    <option value="1">0-2</option>
+                                    <option value="7">14-15</option>
+                                    <option value="6">12-14</option>
+                                    <option value="5">10-12</option>
+                                    <option value="4">8-10</option>
+                                    <option value="3">6-8</option>
+                                    <option value="2">4-6</option>
+                                    <option value="1">2-4</option>
+                                    <option value="0">0-2</option>
                                 </select>
                             </div>
                         </li>
@@ -118,9 +116,13 @@
                 </div>
             </div>
             <br><br>  
-            <div class="col-md-8" style="text-align: center">
-                <p><b>Take a look at the chart below to learn how different <br> variables positively or negatively affect the probability of plays.</b></p>
+            <div class="col-md-8" style="text-align: left">
+                <p><b>Take a look at the chart below to learn how different variables positively or negatively affect the probability of plays.  
+                    As a football fan may expect, down and distance have the most impact while others, not so much.<br> 
                 <img src="../static/images/TriangleHeatMap.png" class="img-fluid" alt="Responsive image"/>
+                <br>Look at the 
+                <a style="color:lightslategrey" href="/findings">findings</a>
+                page to see how these correlate to the prediction.</b></p>
             </div><br>
     </div>
 </body>
