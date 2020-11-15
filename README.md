@@ -226,9 +226,11 @@ After working to increase predictability, we connected the ML model to the final
 
  ![alt text](https://github.com/TrentBrunson/Turbo_Learning/blob/main/static/images/feature_importance.png)
  
- The module is now a fully working machine learning module with scaled data! Try it **[here!](https://ut-football-play-caller.herokuapp.com/)**
+ The module is now a fully working machine learning module with scaled data! Below are the final results for predictive accuracy. 
+ Try it **[here!](https://ut-football-play-caller.herokuapp.com/)**
+![Predictive Accuracy](https://github.com/TrentBrunson/Turbo_Learning/blob/main/static/images/RF_PredictiveAccuracy.png)
  
-To learn more about the ins and outs of our machine learning structure, we created the Findings and Methodology pages. Here's a snapshot of the final versions, which are also accessible through the online published play caller. 
+lastly, to learn more about the ins and outs of our machine learning structure, we created the Findings and Methodology pages. Here's a snapshot of the final versions, which are also accessible through the online published play caller. 
 
 ![Findings Page](https://github.com/TrentBrunson/Turbo_Learning/blob/main/Presentation%20Images/Findings_Page.PNG)
   
