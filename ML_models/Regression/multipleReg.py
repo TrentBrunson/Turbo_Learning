@@ -71,25 +71,10 @@ df["code"]=en_y
 
 output_df = df.type
 features_df = df[['texscore','oppscore','quarter','down','distance','yardline','half', 'time_remaining_binned']]
-# %%
-fig, ax = plt.subplots(figsize= (10,6))
-corrImage = sns.heatmap(df.corr(), vmin=-1, vmax=1, cmap= 'BrBG', annot=True)
-fig = corrImage.get_figure()
-fig.savefig('images/correlationHeatMap.png')
-# %%
-np.triu(np.ones_like(df.corr()))
-# %%
-plt.figure(figsize=(16, 6))
-# define the mask to set the values in the upper triangle to True
-mask = np.triu(np.ones_like(df.corr(), dtype=np.bool))
-triangleHeatMap = sns.heatmap(df.corr(), mask=mask, vmin=-0.5, vmax=1, annot=True, cmap='BrBG')
 
-fig = triangleHeatMap.get_figure()
-fig.savefig('images/TriangleHeatMap.png')
 # %%
 df.corr()[['code']].sort_values(by='code', ascending=False)
 plt.figure(figsize=(8, 12))
 yheatmap = sns.heatmap(df.corr()[['code']].sort_values(by='code', ascending=False), vmin=-0.5, vmax=1, annot=True, cmap='BrBG')
 fig = yheatmap.get_figure()
 fig.savefig('images/PlayTypeHeatMap.png')
-# %%
