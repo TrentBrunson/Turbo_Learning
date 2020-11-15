@@ -226,9 +226,14 @@ After working to increase predictability, we connected the ML model to the final
 
  ![alt text](https://github.com/TrentBrunson/Turbo_Learning/blob/main/static/images/feature_importance.png)
  
- 
  The module is now a fully working machine learning module with scaled data! Try it **[here!](https://ut-football-play-caller.herokuapp.com/)**
  
+To learn more about the ins and outs of our machine learning structure, we created the Findings and Methodology pages. Here's a snapshot of the final versions, which are also accessible through the online published play caller. 
+
+![Findings Page](https://github.com/TrentBrunson/Turbo_Learning/blob/main/Presentation%20Images/Findings_Page.PNG)
+  
+![Methodology Page](https://github.com/TrentBrunson/Turbo_Learning/blob/main/Presentation%20Images/Methodology_Page.PNG)
+
  
 ### Recommendations for Future Analysis 
 In order to further develop this project, we propose the following, which due to timing could not be accomplished by the team within this period of time:
