@@ -33,6 +33,8 @@ After completing the project, we hope to be able to answer the following questio
 * What is the likelihood that the opposing team will call on a "rush" or "pass" based on the down, distance or time?
 * Are there any variables that have a greater affect on the decision call? If so, what are they? 
 
+#### Below is our detailed process that led to our [findings](https://ut-football-play-caller.herokuapp.com/findings) and refined [methodology](https://ut-football-play-caller.herokuapp.com/methodology) summarized on the pages those links.  Click to see a summarized view.  Read on to understand the intimate details of this project.
+
 ## Segment 2
 
 ### Presentation 
@@ -185,8 +187,8 @@ Code in ‘feature_analysis.py’ and ‘featureMap.py’.
     Accuracy score: 0.6368
   * 3rd - Random Forest, Binned time, non-binned “distance”, dropped “week”, dropped “year”
     Accuracy score: 0.6368
-    Reverted back to ‘2nd’ RF model.
-
+    Reverted back to ‘2nd’ RF model.  
+#### See our [findings](https://ut-football-play-caller.herokuapp.com/findings) and [methodology](https://ut-football-play-caller.herokuapp.com/methodology) pages to view the final synopsis on this project.  
 
 ## Segment 3
 
@@ -212,6 +214,7 @@ Additionally, we improved the esthetics to be more on theme with UT, and added a
 ### Machine Learning
 We continued to work for a better accuracy score and finalize elements for a successful connection to the dashboard.        
 
+#### See our [findings](https://ut-football-play-caller.herokuapp.com/findings) and [methodology](https://ut-football-play-caller.herokuapp.com/methodology) pages to view the final synopsis on this project.
 
 ## Segment 4
 
@@ -245,14 +248,14 @@ Lastly, to learn more about the ins and outs of our machine learning structure, 
 
  
 ### Recommendations for Future Analysis 
-In order to further develop this project, we propose the following, which due to timing could not be accomplished by the team within this period of time:
+In order to further develop this project, we propose the following, which due to various project constraints could not be accomplished by the team within this period of time:
 
-* Add categorical variables to make the model more robust
-* Work to increase predictability
-* Perform more in-depth statistical analysis 
+* Add categorical variables to make the model more robust.
+* Refine data and models to increase prediction accuracy.
+* Standardization of data was performed along side model and data tweaks, each producing only fractional increases in accuracy (greatest change was less than 2% increase).  A more in-depth statistical analysis with data normalization and other techniques may marginally increase accuracy.
 * Target data variables to account for differing opponents.  The current assumption in the model is that opponents follow Sun Tzu's philosophy and adjust formations and play calls based on opponent strength and weaknesses.  
 * Increase predictability by removing some outliers (e.g. consecutive kneel-down plays) and assess model impact. 
-* Incorporate a larger data set; while unseen to the user, this team has access to more than a decade of play-by-play CFB data; the current model is limited by the host site size limits.  
+* Incorporate a larger data set; while unseen to the user, this team has access to more than a decade of play-by-play CFB data; the current model is limited by host site size limits.  
 * Make the model iteratively grow; collect prediction results from user utilization to update the latest model.  
 * Use a data set with formation recognition.
 
@@ -268,4 +271,5 @@ Lastly, here's some helpful tip and advice on lesson learned for anyone looking 
  * **Machine Learning:**
    More feature analysis before creating a model
 
-Take these in mind and make your own! 
+Take these in mind and make your own!  In the meantime, use our **[deployed model](https://ut-football-play-caller.herokuapp.com/)** as you watch the next University of Texas Football game and assess for yourself.
+
