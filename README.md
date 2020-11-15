@@ -1,7 +1,7 @@
 # University of Texas Defensive Play-Call Predictor
 
 ## Overview
-This project analyzes college football play-by-play data over the last several years.  After merging hundreds of files and millions of records, this was pared down to the most relevant information: everyting University of Texas!  In all seriousness, to meet the constraints of hosting sites and the like, a single school was chosen to comply with the many restrictions for free stuff.  Speaking of free, go have some fun and give our play-call predictor a try and **[Call a Play!](https://ut-football-play-caller.herokuapp.com/)**
+This project analyzes college football play-by-play data over the last several years.  After merging hundreds of files and millions of records, this was pared down to the most relevant information: everything University of Texas!  In all seriousness, to meet the constraints of hosting sites and the like, a single school was chosen to comply with the many restrictions for free stuff.  Speaking of free, go have some fun and give our play-call predictor a try and **[Call a Play!](https://ut-football-play-caller.herokuapp.com/)**
 
 ## Team Information 
 ### Members: 
