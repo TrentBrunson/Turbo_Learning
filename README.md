@@ -23,20 +23,20 @@ This project analyzes college football play-by-play data over the last several y
 We will analyze college football (CFB) data from several years to determine what defense a team should call based on past successes and failures. 
 
 ### Reasoning for Topic 
-In football, good defense keeps the other team from scoring and provides a good field position, which allows the offense to start their drive-to-goal in a better position, thus allowing an easier time scoring. 
+In football, good defense keeps the other team from scoring and provides a good field position, which allows the offense to start their drive-to-goal in a better position, thus allowing an easier time scoring. Plus it's football season; it's fun; 
 
 ### Data Source Description
 We obtained reliable CFB data from the ESPN API, allowing us to analyze several years of data, which we have narrowed down to 6 years. Based on the amount of data we have, we believe these years are enough to accurately identify trends. 
 
 ### Question The Team Hopes To Answer:
 After completing the project, we hope to be able to answer the following question: 
-* What is the likelihood that the opposing team will call on a "run" or "pass" based on the play, distance or time?
+* What is the likelihood that the opposing team will call on a "rush" or "pass" based on the down, distance or time?
 * Are there any variables that have a greater affect on the decision call? If so, what are they? 
 
 ## Segment 2
 
 ### Presentation 
-Please view our ongoing team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
+Please view our ongoing team presentation here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
 
 The presentation outlines the project, including the following: 
 Selected topic
@@ -47,12 +47,12 @@ Selected topic
 * Description of the analysis phase of the project
 
 ### Database
-For our database, we used **Heroku** to store our data. Our decision to use this cloud platform was due to the dynamic features and its free of cost offerings. 
+For our database, we used **Heroku** to store our data. Our decision to use this cloud platform was due to the dynamic features and it's free. 
 
 #### Tools Used:
 * Python
 * Pandas
-* pgAdmin4
+* PostgreSQL
 * SQLAlchemy
 * Heroku
 
@@ -60,18 +60,23 @@ Detailed below is our ERD:
 
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/DB/QuickDBD-CFB_DB.png)
 
-During our data exploration, we identified a primary key, joined tables to more accurately represent the data, dropped duplicates and narrowed the number of years and attributes to test, based of what we found to be of highest importance. 
+During our data exploration, we created a primary key, joined tables to more accurately represent the data, dropped duplicates and narrowed the number of years and attributes to test, based on what we found to be of highest importance. 
 
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Database-1.PNG)
 
 
 ### Dashboard 
-For this segment, we have completed a storybaord of what will become our dashabord, listed our tools and determined the interactive features. See below for a full description of our storyboard and working plan. 
+For this segment, we have completed a storyboard of what will become our dashabord, listed our tools and determined the interactive features. See below for a full description of our storyboard and working plan. 
 
 #### Tools Used:
 * HTML
 * Bootstrap
 * CSS
+* Python
+* Flask
+* Pandas
+* Numpy
+* joblib
 * Heroku
 
 #### Outline
@@ -104,7 +109,7 @@ For this segment, we have completed a storybaord of what will become our dashabo
 
 #### Tools Used:
 * Python
-* Sklearn
+* Scikit-learn
 * Pandas
 * Pickle serialization (save/load)
 * VSCode
