@@ -46,61 +46,226 @@
         <hr>
     <div class="container">
         <div class="row">
-            <p>Can a machine predict what the opposing team is going to call?  
-                The goal was to predict what the opposing team would call in a given game time situation, 
-                then recommend the type of defense to call for the University of Texas.
-                As we developed the machine learning model key features emerged.  TL;DR But if you dare, read on for our machine learning approach.</p>
-            <br>
+            <p>Can a machine predict what the opposing team is going to call? Certainly! </br>
+                The University of Texas Play Caller's goal is to predict what the opposing 
+                team would call in a given game time situation, then recommend the type of defense 
+                to call for the University of Texas. See below exactly how we were able to 
+                gather, clean, train and execute our machine learning model.  
+            </p>
         </div>
         <div class="row"><h4>Development</h4></div>
         <div class="row">
-            <p>We created a database of over 9,000 plays from the University of Texas to </p>
-        </div>
-        <div class="row"><h4>Thoughtful comments to meet rubric requirements</h4></div><br>
-        <div class="row">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-                culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>We obtained college football (CFB) data from ESPN's API to create a database of over 
+                9,000 plays from the University of Texas, encompassing four years. </p>
         </div>
         <div class="row"><h4>Data pre-processing</h4></div><br>
         <div class="row">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-                culpa officia deserunt mollit anim id est laborum.</p>
+            <p>Before diving into our machine learning processes, we analyzed the data set in the following ways.
+                
+            </p>
         </div>
         <div>
             <ol>
-                <li>List out dependencies</li>
-                <li>import the CFB data</li>
-                <li>Cleaning</li>
-                <li>compile and transform data into key features,dropping unnecessary identifiers</li>
-                <li>Database build and primary key</li>
-                <li>Encode data.  Target data set run = 0, pass = 1</li>
-                <li>Split the data into target and features</li>
-                <li>Split features into training set (50%), test set (25%) and validation set (25%)</li>
-                <li>train and test the model</li>
-                <li>fit the data to the model</li>
-                <li>Use model to make predictions about the next play</li>
+                <li>Imported the CFB data</li>
+                <li>Listed out dependencies</li>
+                <li>Narrowed down the data to one team (UT) and the number of years to analyze (4 years)</li>
+                <li>Identified a possible primary key that consisted of the gameID together with 
+                    the drive number and play number </li>
+                <li>Compiled and transformed data into key features, dropping unnecessary identifiers</li>
+                <li>Concluded that the best option to optimize our probability to follow a 
+                    standard normal distribution was to bin the quarter time by a half</li>
             </ol><br>
         </div>
-        <div class="row"><h4>K-Means</h4></div><br>
+        <div class="row"><h4>Building Database</h4></div><br>
         <div class="row">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-                culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>The first step in processing our data was to clean it and find a way to host it in a cloud platform, 
+                due to the magnitude. </br>
+                Tools used: 
+                <div>
+                    <ul>
+                        <li>Heroku PostgreSQL Database</li>
+                        <li>pgAdmin4</li>
+                        <li>SQLAlchemy</li>
+                    </ul>
+                </div>
+                The database was constructed with two main tables, one hosting UT's Play-By-Play data and the other 
+                hosting the Opposing Team Scores. The tables were joined through a left join, with a created primary key (playId).
+                Additionally, we hosted our database under Heroku for it’s user-friendly and free services. 
+                <br>
+                <br>
+                Detailed below is our final ERD: 
+                <br>
+                <br>
+                <img src="../static/images/QuickDBD-CFB_DB.png" class="img-fluid" alt="Responsive image"/>
+            </p>
+            <p>
+                <br>
+                A snapshot of the combined data set: 
+                <br>
+                <br>
+                <img src="../static/images/Database-1.PNG" class="img-fluid" alt="Responsive image"/>
+            </p>
         </div>
+                <div class="row"><h4>Building our Dashboard</h4></div><br>
+        <div class="row">
+            <p>The dashboard created allows for an easy, user-generated input options, according to 
+                the most predicting factors that we identified during our data analysis phase. </br>
+                Take better look at the probability chart below to see how we identified our factors! 
+                <br>
+                <br>
+                Tools used: 
+                <div>
+                    <ul>
+                        <li>HTML</li>
+                        <li>Bootstrap</li>
+                        <li>CSS</li>
+                        <li>Heroku</li>
+                        <li>JavaScript</li>
+                    </ul>
+                </div>
+            </p>
+        </div>
+            <p>
+            <img src="../static/images/correlationHeatMap.png" class="img-fluid" alt="Responsive image"/>
+            </p>
+        </div>
+        <div class="row"><h4>Machine Learning</h4></div><br>
+        <div class="row">
+            <p> Due to its computationally, we chose to use a random forest (RF) machine learning model for the predictor. 
+                While we’re currently looking at a relatively smaller dataset, 
+                we have the ability to expand it without worrying about the model’s accuracy changing. 
+                Additionally, RF models aren’t as prone to overfitting as other choices, 
+                meaning this model could likely be extended outside of our limited scope. 
+                <br>
+                <br><b>Tools used:</b>
+                <div>
+                    <ul>
+                        <li>Python</li>
+                        <li>Sklearn</li>
+                        <li>Pandas</li>
+                        <li>Pickle serialization (save/load)</li>
+                        <li>VSCode</li>
+                    </ul>
+                </div>
+            </p>
+            <div class="row">
+            <p><b>Preprocessing</b>
+                <div>
+                    <ul>
+                        <li>Transformed related columns to be specific to their relation to Texas, 
+                            aligning with the stated goal of prediction plays of Texas’ opponents.</li>
+                        <li>Plays that did not result in a Rush or Pass (i.e. penalties, timeouts, etc.) were removed.</li>
+                        <li>Dropped N/A values along with one duplicate discovered</li>
+                    </ul>
+                </div>
+            </p>
+            <b>Feature Engineering</b>
+            <div>
+                <ul>
+                    <li> Converted ‘clock’ from HH MM SS datetime format to an integer of total seconds, 
+                        allowing us to bin the results or treat as a continuous value.</li>
+                    <li>Used ‘quarter’ value to create ‘half’ feature.</li>
+                    <li>Converts all outcomes of Pass/Rush 
+                        (i.e. incomplete pass, passing touchdown, rushing touchdown, etc.) to Pass or Rush.</li>
+                    <li>Continuous features (‘yards’, ‘down’) were standardized using the StandardScaler method from sklearn.</li>
+                    <li>Categorical and Object datatyped features were encoded using the OneHotEncoder method from sklearn.</li>
+                </ul>
+            </div>
+            <b>Feature Analysis and subsequent selection / removal:</b>
+            decisions on which columns make it to the feature dataframe and which are ultimately dropped. 
+            <div>
+                <ul>
+                    <li>Feature ‘texscore’ & ‘oppscore’ (used) - 
+                        in conjunction, these two features help determine if a team needs to score quickly, 
+                        leading to more passing, or whether they want to ‘run out the clock,' leading to more run plays.</li>
+                    <li>Feature ‘clock’ transformed into ‘time_remaining_in_half” (used) - This allows us to both bin easily 
+                        and treat it as a continuous feature should it be more beneficial to the 
+                        model. It also reflects the fact that strategies change as teams get closer to the end of the half 
+                        and not so much at the end of the quarter.</li>
+                    <li> Feature ‘quarter’ and ‘half’ (used) - As the game gets later, strategies will change, 
+                        and that seems to be reflected in the feature analysis below.</li>
+                    <li>Feature ‘down’ and ‘distance’ (used) - A primary contributor (something that’s highlighted as well by the 
+                        feature analysis below). It’s also likely the main contributor to a naive, non-ML derived decision of rush/pass.</li>
+                    <li>Feature ‘yardline’ (used) - As field position changes, the playbook opens up and alters strategy. </li>
+                    <li>Feature ‘week’ (dropped) - While an individual team’s strategy may change week over week as personal, 
+                        practice time, and coaching philosophies change, that’s not something that will stay consistent 
+                        across teams or years and the inclusion could result in overfitting.</li>
+                    <li>Feature ‘year’ (dropped) - Similar to the reasoning behind ‘week’ being dropped. 
+                        Additionally, in preliminary feature analysis, year wasn’t a huge driver of change.</li>
+                </ul>
+            </div>
+            <b>Linear Regression Feature Importance</b>
+            By using the LinearRegression method from sklearn and fitting the data to the model, we reveal that the most impactful features are       
+            ‘quarter’, ‘down’, and ‘distance’ aligning with what we see with the correlation heatmap above.
+            <div>
+                <p>
+                    <img src="../static/images/LinearRegressionFeatureImportance.png" class="img-fluid" alt="Responsive image"/>
+                </p>
+            </div>
+            <p>
+            <b>CART Classification Feature Importance</b> 
+            <br>
+            A little bit of a different story here with the ‘quarter’, ‘down’, and ‘distance’ being featured less importantly in the model.     
+            With the growth of the other features, however, it could be an indication that they’re worth keeping in the model. 
+           </p>
+            <div>
+                <p>
+                    <img src="../static/images/CART Classification Feature Importance.png" class="img-fluid" alt="Responsive image"/>
+                </p>
+            </div>
+            <p>
+            <b>RF Classifier Feature Importance</b>
+            <br>
+            This is where we started to see some consistency with feature importance. 
+            First, it was notable that a majority of the features chosen were having an impact. 
+            The ‘half’ feature may warrant a second look given it’s low score compared to the others. 
+           </p>
+            <div>
+                <p>
+                    <img src="../static/images/RFClassifierFeatureImportance.png" class="img-fluid" alt="Responsive image"/>
+                </p>
+            </div>
+            <p>
+            <b>RF Regression Feature Importance</b>
+            <br>
+            The RF regression test was very consistent with the analysis above. 
+            The change of note is the increase in ‘quarter’, ‘down’, and to a smaller extent ‘distance.’  
+            </p>
+            <div>
+                <p>
+                    <img src="../static/images/RFRegressionFeatureImportance.png" class="img-fluid" alt="Responsive image"/>
+                </p>
+            </div>
+            <p>
+            <b>Train, Test Split</b>
+            <br>
+            Using the train_test_split method from sklearn, the data was split to allow for **75%** to be used for 
+            training, and **25%** to be used to test accuracy, precision and recall for the model. There was no need 
+            to stratify as the output variables are near 50/50 splits.
+            </p>
+            <p>
+            <b>Random Forest: Iterations</b>
+                <div>
+                    <ul>
+                        <li> 1st - Random Forest, Binned time, non-binned “distance”, kept “week”: Accuracy score: 0.6272</li>
+                        <li>2nd - Random Forest, Binned time, non-binned “distance”, dropped “week”: 
+                        Accuracy score: 0.6368</li>
+                        <li>3rd - Random Forest, Binned time, non-binned “distance”, dropped “week”, dropped “year”: 
+                        Accuracy score: 0.6368</li>
+                        <li> Reverted back to ‘2nd’ RF model.</li>
+                    </ul>
+                </div>
+           </p>
+           <p>
+            <b>Random Forest: Limitation</b>
+            <br>
+            Though our testing and data analysis demonstrated that RF was the optimal machine learning model for our Defensive Call Player ,
+            there are a few limitations that still exist. First, while there are options available for feature analysis when preparing the data, 
+            once the model is making its decisions, it’s tough to tell what actions it’s taking. 
+            The best way to counteract that is to have good data in. Additionally, RF models aren’t as prone to overfitting as other choices,
+             meaning this model could likely be extended outside of our limited scope.
+           </p>
+        </p>
     </div>
 
     <!-- JavaScript -->
