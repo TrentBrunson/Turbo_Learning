@@ -1,5 +1,7 @@
 # University of Texas Defensive Play-Call Predictor
 
+## Overview
+This project analyzes college football play-by-play data over the last several years.  After merging hundreds of files and millions of records, this was pared down to the most relevant information: everyting University of Texas!  In all seriousness, to meet the constraints of hosting sites and the like, a single school was chosen to comply with the many restrictions for free stuff.  Speaking of free, go have some fun and give our play-call predictor a try and **[Call a Play!](https://ut-football-play-caller.herokuapp.com/)**
 
 ## Team Information 
 ### Members: 
@@ -21,20 +23,20 @@
 We will analyze college football (CFB) data from several years to determine what defense a team should call based on past successes and failures. 
 
 ### Reasoning for Topic 
-In football, good defense keeps the other team from scoring and provides a good field position, which allows the offense to start their drive-to-goal in a better position, thus allowing an easier time scoring. 
+In football, good defense keeps the other team from scoring and provides a good field position, which allows the offense to start their drive-to-goal in a better position, thus allowing an easier time scoring. Plus it's football season; it's fun; 
 
 ### Data Source Description
 We obtained reliable CFB data from the ESPN API, allowing us to analyze several years of data, which we have narrowed down to 6 years. Based on the amount of data we have, we believe these years are enough to accurately identify trends. 
 
-### Question The Team Hopes To Answer:
+### Question the Team Hopes to Answer:
 After completing the project, we hope to be able to answer the following question: 
-* What is the likelihood that the opposing team will call on a "run" or "pass" based on the play, distance or time?
+* What is the likelihood that the opposing team will call on a "rush" or "pass" based on the down, distance or time?
 * Are there any variables that have a greater affect on the decision call? If so, what are they? 
 
 ## Segment 2
 
 ### Presentation 
-Please view our ongoing team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
+Please view our ongoing team presentation here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
 
 The presentation outlines the project, including the following: 
 Selected topic
@@ -45,24 +47,36 @@ Selected topic
 * Description of the analysis phase of the project
 
 ### Database
-For our database, we used **Heroku Postgres - SQL Services** to host our data base. Our decision to use this cloud platform was due to the dynamic features and its free of cost offerings. Our plan of action for our database was created with the utilization of an entity relationship diagram.
+For our database, we used **Heroku Postgres - SQL Services** to host our data base. Our decision to use this cloud platform was due to the dynamic features and its free of cost offerings. Our plan of action for our database was created with the utilization of an entity relationship diagram. 
+
+#### Tools Used:
+* Python
+* Pandas
+* PostgreSQL
+* SQLAlchemy
+* Heroku
 
 Detailed below is our ERD:
 
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/DB/QuickDBD-CFB_DB.png)
 
- We utilized gAdmin4 to create our data tables and alter them to fit our machine learning goals. Primary keys were created with given game, play, and drive identifiers. Our queries also transformed out data to show Texas Score and Opponent Score instead of Home Score and Away Score. We also joined the table with score data with our play data table. Due to the row limitations on Heroku, we did have to limit the amount of years included in our data. We determined the most recent years would give a better representation of what we were trying to accomplish. All data base queries and schemas can be found in the folder titled "DB".
+During our data exploration, we created a primary key, joined tables to more accurately represent the data, dropped duplicates and narrowed the number of years and attributes to test, based on what we found to be of highest importance. 
 
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/Database-1.PNG)
 
 
 ### Dashboard 
-For this segment, we have completed a storybaord of what will become our dashabord, listed our tools and determined the interactive features. See below for a full description of our storyboard and working plan. 
+For this segment, we have completed a storyboard of what will become our dashabord, listed our tools and determined the interactive features. See below for a full description of our storyboard and working plan. 
 
 #### Tools Used:
 * HTML
 * Bootstrap
 * CSS
+* Python
+* Flask
+* Pandas
+* Numpy
+* joblib
 * Heroku
 
 #### Outline
@@ -93,9 +107,16 @@ For this segment, we have completed a storybaord of what will become our dashabo
 
 ### Machine Learning & Analysis
 
+#### Tools Used:
+* Python
+* Scikit-learn
+* Pandas
+* Pickle serialization (save/load)
+* VSCode
+
 * **Preprocessing** - coded in ‘clean.py’
   * Used the ‘glob’ method to combine years of data into a single dataframe.
-  * Initial columns kept: 'gameId', 'driveIndex', 'playIndex', 'year', 'week', 'homeAbbr', 'awayAbbr', 'offenseAbbr', 'defenseAbbr', 'homeScore', 'awayScore', 'quarter', 'clock',    'type', 'down', 'distance', 'yardLine', 'yardsGained'.
+  * Initial columns kept: 'gameId', 'driveIndex', 'playIndex', 'year', 'week', 'homeAbbr', 'awayAbbr', 'offenseAbbr', 'defenseAbbr', 'homeScore', 'awayScore', 'quarter',       'clock','type', 'down', 'distance', 'yardLine', 'yardsGained'.
   * Dropped N/A values along with one duplicate discovered in the ‘2014’ row.
   * Transformed related columns to be specific to their relation to Texas -- aligning with the stated goal of prediction plays of Texas’ opponents.
   * Plays that did not result in a Rush or Pass (i.e. penalties, timeouts, etc.) were removed.
@@ -173,7 +194,7 @@ Code in ‘feature_analysis.py’ and ‘featureMap.py’.
 Please view our ongoing team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
 
 ### Database
-For our database, we finalized our connection to the machine learning model by utilizing SQL Alchemy. Our main focus now is to get our app running as a Heroku application. This required us to troubleshoot Heroku application deployment. We were able to get our application to deploy successfully by using a Pipenv. The next step will be to make sure our dashboard interactive features are working as expected with our model and database.
+For our database, we finalized our connection to the machine learning model by utilizing SQL Alchemy. Our main focus now is to get our app running as a Heroku application. This required us to troubleshoot Heroku application deployment. We were able to get our application to deploy successfully by using a Pipenv. The next step will be to make sure our dashboard interactive features are working as expected with our model and database. 
 
 ### Dashboard
 
@@ -186,11 +207,65 @@ See below for an updated image on our interactive feature:
 
 Additionally, we improved the esthetics to be more on theme with UT, and added a probability chart to the right for added information.
 
-       ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/MS3-Dashboard_Index.PNG)
-
+       ![alt text](https://github.com/TrentBrunson/Turbo_Learning/blob/main/Presentation%20Images/MS3-Dashboard_Index.PNG)
 
 ### Machine Learning
 We continued to work for a better accuracy score and finalize elements for a successful connection to the dashboard.        
 
 
+## Segment 4
 
+### Presentation 
+Please view our finalized team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
+
+### Dashboard
+We finalized our connection with our Database in Heroku and were able to successfully have a response from the user-generated inputs through the coded 'App.py' file. We added additional features, such as an interactive graph, which can be found in the "Findings" page of the dashbaord.
+
+Here's our final dashbaord:
+
+ ![alt text](https://github.com/TrentBrunson/Turbo_Learning/blob/main/Presentation%20Images/Dashboard_LandingPage.PNG)
+ 
+
+### Machine Learning
+After working to increase predictability, we connected the ML model to the final Dashboard. The image below further validates the importance of the user-generated inputs and why the team chose to zone in these features. 
+
+ ![alt text](https://github.com/TrentBrunson/Turbo_Learning/blob/main/static/images/feature_importance.png)
+ 
+ The module is now a fully working machine learning module with scaled data! Below are the final results for predictive accuracy. 
+ 
+ Try it **[here!](https://ut-football-play-caller.herokuapp.com/)**
+
+![Predictive Accuracy](https://github.com/TrentBrunson/Turbo_Learning/blob/main/static/images/RF_PredictiveAccuracy.png)
+ 
+Lastly, to learn more about the ins and outs of our machine learning structure, we created the Findings and Methodology pages. Here's a snapshot of the final versions, which are also accessible through the online published play caller. 
+
+![Findings Page](https://github.com/TrentBrunson/Turbo_Learning/blob/main/Presentation%20Images/Findings_Page.PNG)
+  
+![Methodology Page](https://github.com/TrentBrunson/Turbo_Learning/blob/main/Presentation%20Images/Methodology_Page.PNG)
+
+ 
+### Recommendations for Future Analysis 
+In order to further develop this project, we propose the following, which due to timing could not be accomplished by the team within this period of time:
+
+* Add categorical variables to make the model more robust
+* Work to increase predictability
+* Perform more in-depth statistical analysis 
+* Target data variables to account for differing opponents.  The current assumption in the model is that opponents follow Sun Tzu's philosophy and adjust formations and play calls based on opponent strength and weaknesses.  
+* Increase predictability by removing some outliers (e.g. consecutive kneel-down plays) and assess model impact. 
+* Incorporate a larger data set; while unseen to the user, this team has access to more than a decade of play-by-play CFB data; the current model is limited by the host site size limits.  
+* Make the model iteratively grow; collect prediction results from user utilization to update the latest model.  
+* Use a data set with formation recognition.
+
+### Different Avenues the Team would have Taken 
+Lasty, here's some helpful tip and advice on lesson learned for anyone looking to replicate this project. 
+
+* **Database:**
+  Save space and made structure more succinct with one combined table
+
+* **Dashboard:**
+  Create a READme file using Markdown to simplify HTML dashboard 
+
+ * **Machine Learning:**
+   More feature analysis before creating a model
+
+Take these in mind and make your own! 
