@@ -1,7 +1,7 @@
 # University of Texas Defensive Play-Call Predictor
 
 ## Overview
-This project analyzes college football play-by-play data over the last several years.  After merging hundreds of files and millions of records, this was pared down to the most relevant information: everyting University of Texas!  In all seriousness, to meet the constraints of hosting sites and the like, a single school was chosen to comply with the many restrictions for free stuff.  Speaking of free, go have some fun and give our play-call predictor a try and **[Call a Play!](https://ut-football-play-caller.herokuapp.com/)**
+This project analyzes college football play-by-play data over the last several years.  After merging hundreds of files and millions of records, this was pared down to the most relevant information: everything University of Texas!  In all seriousness, to meet the constraints of hosting sites and the like, a single school was chosen to comply with the many restrictions for free stuff.  Speaking of free, go have some fun and give our play-call predictor a try and **[Call a Play!](https://ut-football-play-caller.herokuapp.com/)**
 
 ## Team Information 
 ### Members: 
@@ -66,7 +66,7 @@ During our data exploration, we created a primary key, joined tables to more acc
 
 
 ### Dashboard 
-For this segment, we have completed a storyboard of what will become our dashabord, listed our tools and determined the interactive features. See below for a full description of our storyboard and working plan. 
+For this segment, we have completed a storyboard of what will become our dashboard, listed our tools and determined the interactive features. See below for a full description of our storyboard and working plan. 
 
 #### Tools Used:
 * HTML
@@ -86,7 +86,7 @@ For this segment, we have completed a storyboard of what will become our dashabo
 1.) Landing Page
   * Clean and interactive 
   * Contains a navigation bar linking to the Methodology and Machine Learning Model Findings
-  * Top section explans the purpose of the dashboard and entices users to use our predicting model 
+  * Top section explains the purpose of the dashboard and entices users to use our predicting model 
   
 2.) User Input Sidebar
   * In a left sidebar, the user input fields allow for data entry. Once data is entered, the user presses the “Call Play” button to activate our ML model, allowing the user to   predict the next defensive play call
@@ -130,8 +130,8 @@ For this segment, we have completed a storyboard of what will become our dashabo
   * Converts all outcomes of Pass/Rush (i.e. incomplete pass, passing touchdown, rushing touchdown, etc.) to Pass or Rush.
     * This creates a true binary and also accounts for the fact that we’re not interested in the outcome outside of the play chosen.
   * Continuous features (‘yards’, ‘down’) are standardized using the StandardScaler method from sklearn.
-  * Categorical and Object datatyped features or encoded using the OneHotEncoder method from sklearn.
-      * Subsequent columns are then remerged with the original dataset and the original columns are dropped.
+  * Categorical and Object datatype features or encoded using the OneHotEncoder method from sklearn.
+      * Subsequent columns are then re-merged with the original dataset and the original columns are dropped.
       
 * **Feature Analysis and subsequent selection / removal** - *decisions on which columns make it to the feature dataframe and which are ultimately dropped. 
 Code in ‘feature_analysis.py’ and ‘featureMap.py’.
@@ -219,9 +219,9 @@ We continued to work for a better accuracy score and finalize elements for a suc
 Please view our finalized team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
 
 ### Dashboard
-We finalized our connection with our Database in Heroku and were able to successfully have a response from the user-generated inputs through the coded 'App.py' file. We added additional features, such as an interactive graph, which can be found in the "Findings" page of the dashbaord.
+We finalized our connection with our Database in Heroku and were able to successfully have a response from the user-generated inputs through the coded 'App.py' file. We added additional features, such as an interactive graph, which can be found in the "Findings" page of the dashboard.
 
-Here's our final dashbaord:
+Here's our final dashboard:
 
  ![alt text](https://github.com/TrentBrunson/Turbo_Learning/blob/main/Presentation%20Images/Dashboard_LandingPage.PNG)
  
@@ -257,7 +257,7 @@ In order to further develop this project, we propose the following, which due to
 * Use a data set with formation recognition.
 
 ### Different Avenues the Team would have Taken 
-Lasty, here's some helpful tip and advice on lesson learned for anyone looking to replicate this project. 
+Lastly, here's some helpful tip and advice on lesson learned for anyone looking to replicate this project. 
 
 * **Database:**
   Save space and made structure more succinct with one combined table
