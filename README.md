@@ -47,7 +47,7 @@ Selected topic
 * Description of the analysis phase of the project
 
 ### Database
-For our database, we used **Heroku** to store our data. Our decision to use this cloud platform was due to the dynamic features and it's free. 
+For our database, we used **Heroku Postgres - SQL Services** to host our data base. Our decision to use this cloud platform was due to the dynamic features and its free of cost offerings. Our plan of action for our database was created with the utilization of an entity relationship diagram. 
 
 #### Tools Used:
 * Python
@@ -194,7 +194,7 @@ Code in ‘feature_analysis.py’ and ‘featureMap.py’.
 Please view our ongoing team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
 
 ### Database
-For our database, we finalized our Heroku connection with the dashboard. While we're still finalizing our connection with the flask app, it's coming along. Our data and dhashboard needed to migrated to Heroku in order to be able to read the data we sorted and organized in the cloud platform. 
+For our database, we finalized our connection to the machine learning model by utilizing SQL Alchemy. Our main focus now is to get our app running as a Heroku application. This required us to troubleshoot Heroku application deployment. We were able to get our application to deploy successfully by using a Pipenv. The next step will be to make sure our dashboard interactive features are working as expected with our model and database. 
 
 ### Dashboard
 
