@@ -68,11 +68,11 @@
             <ol>
                 <li>Imported the CFB data</li>
                 <li>Listed out dependencies and checked data for normal distributions, scale, quality, etc.</li>
-                <li>Narrowed down the data to one team (UT) and the number of years to analyze (4 years)</li>
+                <li>Narrowed down the data to one team (UT) and the number of years to analyze (4 years).</li>
                 <li>Identified a possible primary key that consisted of the gameID together with 
-                    the drive number and play number </li>
+                    the drive number and play number. </li>
                 <li>Performed initial model assessments weighing accuracy, precision, normalcy, f-score, etc.</li>
-                <li>Compiled and transformed data into key features, dropping unnecessary identifiers</li>
+                <li>Compiled and transformed data into key features, dropping unnecessary identifiers.</li>
                 <li>Fine tuned models looking at depth of trees, number of features, number of estimators, etc.</li>
                 <li>Concluded that the best option to optimize our probability to follow a 
                     standard normal distribution was to bin the quarter time into halves.</li>
@@ -121,6 +121,11 @@
                         <li>HTML</li>
                         <li>Bootstrap</li>
                         <li>CSS</li>
+                        <li>Python</li>
+                        <li>Flask</li>
+                        <li>Pandas</li>
+                        <li>Numpy</li>
+                        <li>joblib</li>
                         <li>Heroku</li>
                     </ul>
                 </div>
@@ -133,9 +138,9 @@
         <div class="row"><h4>Machine Learning</h4></div><br>
         <div class="row">
             <p> Some features of the data showed high variance; given how a random forest (RF) machine learning model
-                with many decision trees can transform this to a low variance model, we chose RF for the predictor. 
+                with many decision trees can transform this to a low variance model, we chose RF for the predictor.  
                 While we’re currently looking at a relatively smaller dataset, 
-                we have the ability to expand it without worrying about the model’s accuracy changing. 
+                we have the ability to expand it without worrying about the model’s accuracy changing.  
                 Additionally, RF models aren’t as prone to overfitting as other choices, 
                 meaning this model could likely be extended outside of our limited scope. 
                 <br>
@@ -143,7 +148,7 @@
                 <div>
                     <ul>
                         <li>Python</li>
-                        <li>Sklearn</li>
+                        <li>Scikit-learn</li>
                         <li>Pandas</li>
                         <li>Pickle serialization (save/load)</li>
                         <li>VSCode</li>
@@ -173,8 +178,7 @@
                     <li>Categorical and Object datatyped features were encoded using the OneHotEncoder method from sklearn.</li>
                 </ul>
             </div>
-            <b>Feature Analysis and subsequent selection / removal:</b>
-            decisions on which columns make it to the feature dataframe and which are ultimately dropped. 
+            <b>Feature Analysis and subsequent selection / removal:</b>Decisions on which columns make it to the feature dataframe and which are ultimately dropped. 
             <div>
                 <ul>
                     <li>Feature ‘texscore’ & ‘oppscore’ (used) - 
