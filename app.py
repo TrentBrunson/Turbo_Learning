@@ -1,5 +1,3 @@
-# coding: utf-8
-
 import pickle
 import numpy as np
 from joblib import dump, load
@@ -23,7 +21,7 @@ def predict():
 
     # convert strings to numbers
     quarter = int(quarter)
-    clock = int(clock)
+    time_in_quarter = int(clock)
     down = int(down)
     distance = int(distance)
 
@@ -35,32 +33,31 @@ def predict():
     else:
         half = 2
 
-    # convert clock input to fit the model
-    if clock == '14-15':
-        time_in_quarter = 7
-    elif clock == '12-14':
-        time_in_quarter = 6
-    elif clock == '10-12':
-        time_in_quarter = 5
-    elif clock == '8-10':
-        time_in_quarter = 4
-    elif clock == '6-8':
-        time_in_quarter = 3
-    elif clock == '4-6':
-        time_in_quarter = 2
-    elif clock == '2-4':
-        time_in_quarter = 1
-    else:
-        time_in_quarter = 0
+    # # convert clock input to fit the model
+    # if clock == '14-15':
+    #     time_in_quarter = 7
+    # elif clock == '12-14':
+    #     time_in_quarter = 6
+    # elif clock == '10-12':
+    #     time_in_quarter = 5
+    # elif clock == '8-10':
+    #     time_in_quarter = 4
+    # elif clock == '6-8':
+    #     time_in_quarter = 3
+    # elif clock == '4-6':
+    #     time_in_quarter = 2
+    # elif clock == '2-4':
+    #     time_in_quarter = 1
+    # else:
+    #     time_in_quarter = 0
     
-    # taking into account half
-
-    if quarter == 1:
-        time_remaining_binned = time_in_quarter
-    elif quarter == 3:
-        time_remaining_binned = time_in_quarter
-    else:
+    # binning time into halves
+    if quarter == 2:
         time_remaining_binned = time_in_quarter + 7
+    elif quarter == 4:
+        time_remaining_binned = time_in_quarter + 7
+    else: # for quarters 1, 3, main cases & OT edge cases
+        time_remaining_binned = time_in_quarter
 
     # Load the saved scaler from the input data
     scaler = load('rf_std_scaler.bin')

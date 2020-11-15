@@ -67,13 +67,15 @@
         <div>
             <ol>
                 <li>Imported the CFB data</li>
-                <li>Listed out dependencies</li>
+                <li>Listed out dependencies and checked data for normal distributions, scale, quality, etc.</li>
                 <li>Narrowed down the data to one team (UT) and the number of years to analyze (4 years)</li>
                 <li>Identified a possible primary key that consisted of the gameID together with 
                     the drive number and play number </li>
+                <li>Performed initial model assessments weighing accuracy, precision, normalcy, f-score, etc.</li>
                 <li>Compiled and transformed data into key features, dropping unnecessary identifiers</li>
+                <li>Fine tuned models looking at depth of trees, number of features, number of estimators, etc.</li>
                 <li>Concluded that the best option to optimize our probability to follow a 
-                    standard normal distribution was to bin the quarter time by a half</li>
+                    standard normal distribution was to bin the quarter time into halves.</li>
             </ol><br>
         </div>
         <div class="row"><h4>Building Database</h4></div><br>
@@ -110,7 +112,7 @@
         <div class="row">
             <p>The dashboard created allows for an easy, user-generated input options, according to 
                 the most predicting factors that we identified during our data analysis phase. </br>
-                Take better look at the probability chart below to see how we identified our factors! 
+                Take look at the probability chart below to see how we identified our factors. 
                 <br>
                 <br>
                 Tools used: 
@@ -120,7 +122,6 @@
                         <li>Bootstrap</li>
                         <li>CSS</li>
                         <li>Heroku</li>
-                        <li>JavaScript</li>
                     </ul>
                 </div>
             </p>
@@ -131,7 +132,8 @@
         </div>
         <div class="row"><h4>Machine Learning</h4></div><br>
         <div class="row">
-            <p> Due to its computationally, we chose to use a random forest (RF) machine learning model for the predictor. 
+            <p> Some features of the data showed high variance; given how a random forest (RF) machine learning model
+                with many decision trees can transform this to a low variance model, we chose RF for the predictor. 
                 While we’re currently looking at a relatively smaller dataset, 
                 we have the ability to expand it without worrying about the model’s accuracy changing. 
                 Additionally, RF models aren’t as prone to overfitting as other choices, 
@@ -267,12 +269,5 @@
            </p>
         </p>
     </div>
-
-    <!-- JavaScript -->
-    <script type="text/javascript" src="static/js/logic.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <!-- <script src="plots.js"></script> -->
 </body>
-
 </html>

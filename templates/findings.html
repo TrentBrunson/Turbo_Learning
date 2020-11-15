@@ -122,7 +122,7 @@
                         to make accurate predictions.
                         <br>Look at the 
                         <a href="/kmeans" style="color:blue;">interactive graph</a>
-                        page to one of the many data visualizations we explored to see how features correlate to the predicted play.
+                        page to see one of the many data visualizations we explored to see how features correlate to the predicted play.
                     </div>
                 </p>
             </div>
@@ -133,15 +133,16 @@
                 <br>
                 <br><b> Limitations of the model selected </b><br>
                 <br>
-                Though our testing and data analysis demonstrated that RF was the optimal machine learning model for our Defensive Call Player ,
-                there are a few limitations that still exist. First, while there are options available for feature analysis when preparing the data, 
+                Though our testing and data analysis RF emerged as the optimal machine learning model for our Defensive Call Player.  
+                There are a few limitations that still exist.  First, while there are options available for feature analysis when preparing the data, 
                 once the model is making its decisions, it’s tough to tell what actions it’s taking. 
-                The best way to counteract that is to have good data in. Additionally, RF models aren’t as prone to overfitting as other choices,
+                The best way to counteract that is to have good data in.  Additionally, RF models aren’t as prone to overfitting as other choices,
                  meaning this model could likely be extended outside of our limited scope.
                 <br>
                 <br><b>Strengths of model chosen</b> <br>
                 <br>
-                Due to its computationally, we chose to use a random forest (RF) machine learning model for the predictor. 
+                Some features of the data showed high variance; given how a random forest (RF) machine learning model
+                with many decision trees can transform this to a low variance model, we chose RF for the predictor. 
                 While we’re currently looking at a relatively smaller dataset, 
                 we have the ability to expand it without worrying about the model’s accuracy changing. 
                 Additionally, RF models aren’t as prone to overfitting as other choices, 
@@ -154,14 +155,16 @@
             <p> Below are some recommendations for further development. 
                     <div>
                         <ul>
-                            <li>Add categorical variables.</li>
-                            <li>Increase predictability. </li>
-                            <li>Rework to add a possibly larger set of data and continue to generate the latest.</li>
+                            <li>Target data variables to account for differing opponents.  The current assumption in the model is that 
+                                opponents follow Sun Tzu's philosophy and adjust formations and play calls based on opponent strength and weaknesses.</li>
+                            <li>Increase predictability by removing some outliers (e.g. consecutive kneel-down plays) and assess model impact. </li>
+                            <li>Incorporate a larger data set; while unseen to the user, this team has access to more than a decade of play-by-play CFB data; the current model is limited by the host site size limits.</li>
+                            <li>Make the model iteratively grow; collect prediction results from user utilization to update the latest model.</li>                            
+                            <li>Use a data set with formation recognition.</li>
                         </ul>
-                    </div>
+                    </div><br>
                </p>
-        </div>
+        </div><br>
     </div>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </body>
 </html>
