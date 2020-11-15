@@ -2,6 +2,7 @@
 
 import pickle
 import numpy as np
+from joblib import dump, load
 from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
@@ -34,26 +35,49 @@ def predict():
     else:
         half = 2
 
-    # convert clock to seconds so the ML model can take it in
-    if half == 1:
-        clockSeconds = clock * 60
-    elif half == 2:
-        clockSeconds = clock * 60 * 2
+    # convert clock input to fit the model
+    if clock == '14-15':
+        time_in_quarter = 7
+    elif clock == '12-14':
+        time_in_quarter = 6
+    elif clock == '10-12':
+        time_in_quarter = 5
+    elif clock == '8-10':
+        time_in_quarter = 4
+    elif clock == '6-8':
+        time_in_quarter = 3
+    elif clock == '4-6':
+        time_in_quarter = 2
+    elif clock == '2-4':
+        time_in_quarter = 1
     else:
-        clockSeconds = clock * 60 * 3
+        time_in_quarter = 0
+    
+    # taking into account half
+
+    if quarter == 1:
+        time_remaining_binned = time_in_quarter
+    elif quarter == 3:
+        time_remaining_binned = time_in_quarter
+    else:
+        time_remaining_binned = time_in_quarter + 7
+
+    # Load the saved scaler from the input data
+    scaler = load('rf_std_scaler.bin')
 
     # take inputs and put into array, ready for ML model
-    feature_list = [half, clockSeconds, down, distance]
+    feature_list = [half, down, distance, time_remaining_binned]
     features = [np.array(feature_list)]
+    scaled_features = scaler.transform(features)
 
     # call the play
     # load model from saved file
-    model = pickle.load(open('rfPickle.pkl', 'rb'))
-    prediction = model.predict(features)
+    model = pickle.load(open('finalized_rf_model.sav', 'rb'))
+    prediction = model.predict(scaled_features)
     output = prediction[0]
 
     # binary output for pass or rush call
-    if output == 1:
+    if output == 'Pass':
         result = 'Pass'
     else:
         result = 'Rush'
