@@ -49,6 +49,13 @@ Selected topic
 ### Database
 For our database, we used **Heroku** to store our data. Our decision to use this cloud platform was due to the dynamic features and its free of cost offerings. 
 
+#### Tools Used:
+* Python
+* Pandas
+* pgAdmin4
+* SQLAlchemy
+* Heroku
+
 Detailed below is our ERD:
 
 ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/DB/QuickDBD-CFB_DB.png)
@@ -95,9 +102,16 @@ For this segment, we have completed a storybaord of what will become our dashabo
 
 ### Machine Learning & Analysis
 
+#### Tools Used:
+* Python
+* Sklearn
+* Pandas
+* Pickle serialization (save/load)
+* VSCode
+
 * **Preprocessing** - coded in ‘clean.py’
   * Used the ‘glob’ method to combine years of data into a single dataframe.
-  * Initial columns kept: 'gameId', 'driveIndex', 'playIndex', 'year', 'week', 'homeAbbr', 'awayAbbr', 'offenseAbbr', 'defenseAbbr', 'homeScore', 'awayScore', 'quarter', 'clock',    'type', 'down', 'distance', 'yardLine', 'yardsGained'.
+  * Initial columns kept: 'gameId', 'driveIndex', 'playIndex', 'year', 'week', 'homeAbbr', 'awayAbbr', 'offenseAbbr', 'defenseAbbr', 'homeScore', 'awayScore', 'quarter',       'clock','type', 'down', 'distance', 'yardLine', 'yardsGained'.
   * Dropped N/A values along with one duplicate discovered in the ‘2014’ row.
   * Transformed related columns to be specific to their relation to Texas -- aligning with the stated goal of prediction plays of Texas’ opponents.
   * Plays that did not result in a Rush or Pass (i.e. penalties, timeouts, etc.) were removed.
@@ -188,11 +202,53 @@ See below for an updated image on our interactive feature:
 
 Additionally, we improved the esthetics to be more on theme with UT, and added a probability chart to the right for added information.
 
-       ![alt text](https://github.com/TrentBrunson/turbo-learning/blob/main/Presentation%20Images/MS3-Dashboard_Index.PNG)
-
+       ![alt text](https://github.com/TrentBrunson/Turbo_Learning/blob/main/Presentation%20Images/MS3-Dashboard_Index.PNG)
 
 ### Machine Learning
 We continued to work for a better accuracy score and finalize elements for a successful connection to the dashboard.        
 
 
+## Segment 4
+
+### Presentation 
+Please view our finalized team presentation draft here: https://docs.google.com/presentation/d/1fYbRv5cNzHDDJVVBG5kk5iRclJ1ldfzgQI6HdRqE9GY/edit?usp=sharing
+
+### Dashboard
+We finalized our connection with our Database in Heroku and were able to successfully have a response from the user-generated inputs through the coded 'App.py' file. We added additional features, such as an interactive graph, which can be found in the "Findings" page of the dashbaord.
+
+Here's our final dashbaord:
+
+ ![alt text](https://github.com/TrentBrunson/Turbo_Learning/blob/main/Presentation%20Images/Dashboard_LandingPage.PNG)
+ 
+
+### Machine Learning
+After working to increase predictability, we connected the ML model to the final Dashboard. The image below further validates the importance of the user-generated inputs and why the team chose to zone in these features. 
+
+ ![alt text](https://github.com/TrentBrunson/Turbo_Learning/blob/main/static/images/feature_importance.png)
+ 
+ 
+ The module is now a fully working machine learning module with scaled data! Try it **[here!](https://ut-football-play-caller.herokuapp.com/)**
+ 
+ 
+### Recommendations for Future Analysis 
+In order to further develop this project, we propose the following, which due to timing could not be accomplished by the team within this period of time:
+
+* Add categorical variables to make the model more robust
+* Work to increase predictability
+* Perform more in-depth statistical analysis 
+
+
+### Different Avenues The Team Would Have Taken 
+Lasty, here's some helpful tip and advice on lesson learned for anyone looking to replicate this project. 
+
+* **Database:**
+  Save space and made structure more succinct with one combined table
+
+* **Dashboard:**
+  Create a READme file using Markdown to simplify HTML dashboard 
+
+ * **Machine Learning:**
+   More feature analysis before creating a model
+
+Take these in mind and make your own! 
 
