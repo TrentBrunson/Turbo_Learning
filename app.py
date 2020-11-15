@@ -32,24 +32,6 @@ def predict():
         half = 3
     else:
         half = 2
-
-    # # convert clock input to fit the model
-    # if clock == '14-15':
-    #     time_in_quarter = 7
-    # elif clock == '12-14':
-    #     time_in_quarter = 6
-    # elif clock == '10-12':
-    #     time_in_quarter = 5
-    # elif clock == '8-10':
-    #     time_in_quarter = 4
-    # elif clock == '6-8':
-    #     time_in_quarter = 3
-    # elif clock == '4-6':
-    #     time_in_quarter = 2
-    # elif clock == '2-4':
-    #     time_in_quarter = 1
-    # else:
-    #     time_in_quarter = 0
     
     # binning time into halves
     if quarter == 2:
