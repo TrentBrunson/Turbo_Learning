@@ -250,7 +250,11 @@ In order to further develop this project, we propose the following, which due to
 * Add categorical variables to make the model more robust
 * Work to increase predictability
 * Perform more in-depth statistical analysis 
-
+* Target data variables to account for differing opponents.  The current assumption in the model is that opponents follow Sun Tzu's philosophy and adjust formations and play calls based on opponent strength and weaknesses.  
+* Increase predictability by removing some outliers (e.g. consecutive kneel-down plays) and assess model impact. 
+* Incorporate a larger data set; while unseen to the user, this team has access to more than a decade of play-by-play CFB data; the current model is limited by the host site size limits.  
+* Make the model iteratively grow; collect prediction results from user utilization to update the latest model.  
+* Use a data set with formation recognition.
 
 ### Different Avenues The Team Would Have Taken 
 Lasty, here's some helpful tip and advice on lesson learned for anyone looking to replicate this project. 
@@ -265,4 +269,3 @@ Lasty, here's some helpful tip and advice on lesson learned for anyone looking t
    More feature analysis before creating a model
 
 Take these in mind and make your own! 
-
