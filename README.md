@@ -28,7 +28,7 @@ In football, good defense keeps the other team from scoring and provides a good 
 ### Data Source Description
 We obtained reliable CFB data from the ESPN API, allowing us to analyze several years of data, which we have narrowed down to 6 years. Based on the amount of data we have, we believe these years are enough to accurately identify trends. 
 
-### Question The Team Hopes To Answer:
+### Question the Team Hopes to Answer:
 After completing the project, we hope to be able to answer the following question: 
 * What is the likelihood that the opposing team will call on a "rush" or "pass" based on the down, distance or time?
 * Are there any variables that have a greater affect on the decision call? If so, what are they? 
@@ -256,7 +256,7 @@ In order to further develop this project, we propose the following, which due to
 * Make the model iteratively grow; collect prediction results from user utilization to update the latest model.  
 * Use a data set with formation recognition.
 
-### Different Avenues The Team Would Have Taken 
+### Different Avenues the Team would have Taken 
 Lasty, here's some helpful tip and advice on lesson learned for anyone looking to replicate this project. 
 
 * **Database:**
